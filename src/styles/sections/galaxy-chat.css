@@ -287,6 +287,24 @@
 @media (max-width: 768px) {
     #galaxy-chat-section {
         padding: 80px 1rem 20px;
+        overflow: visible !important;
+        touch-action: pan-y;
+    }
+    
+    /* Hide galaxy canvas on mobile for better performance and UX */
+    #galaxy-canvas {
+        display: none !important;
+        visibility: hidden !important;
+    }
+    
+    .galaxy-content-wrapper {
+        position: relative;
+        z-index: 10;
+    }
+    
+    .galaxy-chat-container {
+        position: relative;
+        z-index: 10;
     }
 
     .welcome-grid {
@@ -295,10 +313,36 @@
 
     .welcome-title {
         margin-bottom: 2rem;
+        font-size: 1.5rem;
     }
 
     .welcome-card {
         padding: 1.25rem;
+    }
+    
+    /* Fix input area for mobile */
+    .galaxy-controls {
+        position: relative;
+        z-index: 100;
+        touch-action: manipulation;
+    }
+    
+    .galaxy-input-area {
+        position: relative;
+        z-index: 100;
+        touch-action: manipulation;
+    }
+    
+    .galaxy-input {
+        font-size: 16px !important; /* Prevents iOS zoom on focus */
+        -webkit-appearance: none;
+        appearance: none;
+        touch-action: manipulation;
+    }
+    
+    .galaxy-submit {
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
     }
 }
 
