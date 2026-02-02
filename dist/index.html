@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Okeep - İşletmenizin Beyni Bizimle Daha Hızlı! Terzi dikimi AI çözümleri.">
+  <title>Okeep | AI Studio</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@500;600&family=Kalam:wght@400;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script type="module" crossorigin src="/assets/index-33PRB6N2.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-B-9j3knP.css">
+</head>
+
+<body>
+  <!-- FIXED GLOBAL BACKGROUND -->
+  <div id="global-canvas-bg">
+    <canvas id="hero-canvas"></canvas>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       HEADER - Sticky Navigation with Mega Menu
+  ═══════════════════════════════════════════════════════════════════════ -->
+  <header class="header" id="header">
+    <div class="header__container">
+      <a href="/" class="header__logo">
+        <span class="logo-text">okeep</span>
+      </a>
+
+      <a href="#iletisim" class="header__cta">
+        Hemen Başla
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       HERO SECTION - Playful Messaging with Hand-Drawn Effects
+  ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="hero scroll-section" id="hero">
+    <!-- Canvas moved to global background -->
+
+    <div class="hero__content">
+      <h1 class="hero__title">
+        İşletmenizin Beyni Artık
+        <span class="highlight-wrapper">
+          <span class="highlight-text">Daha Hızlı!</span>
+          <svg class="highlight-underline" viewBox="0 0 200 20" preserveAspectRatio="none">
+            <path class="underline-path" d="M0,15 Q50,5 100,15 T200,15" fill="none" stroke="currentColor"
+              stroke-width="3" />
+          </svg>
+        </span>
+      </h1>
+      <p class="hero__subtitle">
+        Angarya, karmaşa ve zaman kaybına son. Operasyonel yüklerinizi AI'ya devredin, siz sadece büyümeye odaklanın.
+      </p>
+
+      <div class="hero__actions">
+        <a href="#iletisim" class="btn btn--primary btn-tailor">
+          Ücretsiz Demo Al
+        </a>
+        <a href="#hizmetler" class="btn btn--ghost btn-tailor">
+          Çözümleri Keşfet
+        </a>
+      </div>
+    </div>
+
+    </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       SECTOR MARQUEE - Diagonal Scrolling Industries
+  ═══════════════════════════════════════════════════════════════════════ -->
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       SECTOR SECTION - Scroll Snap Target
+  ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="sectors-snap scroll-section" id="sektorler-snap">
+    <div class="container" style="position: relative; z-index: 2;">
+      <div class="section-header">
+        <h2 class="section-title" style="color: white; text-shadow: 0 2px 10px rgba(0,0,0,0.5); margin-bottom: 0.5rem;">
+          Her Sektöre Özel <span class="text-gradient">AI Akışı</span>
+        </h2>
+        <p class="aesthetic-subtitle">Sektörler</p>
+      </div>
+
+      <!-- Content will serve as overlay for the canvas animation -->
+      <div class="sectors-overlay-text">
+
+        <!-- ROW 1: Scrolling Left -->
+        <div class="sector-marquee-row marquee-left">
+          <div class="marquee-track">
+            <!-- Set 1 -->
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="utensils"></i></span><span class="sector-label">Restoran</span></button>
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="coffee"></i></span><span class="sector-label">Kafe</span></button>
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="wine"></i></span><span class="sector-label">Bar</span></button>
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="sandwich"></i></span><span class="sector-label">Fast Food</span></button>
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="croissant"></i></span><span class="sector-label">Fırın</span></button>
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="package"></i></span><span class="sector-label">Paket Servis</span></button>
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="chef-hat"></i></span><span class="sector-label">Fine Dining</span></button>
+            <!-- Set 1 Repeat (for smooth loop) -->
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="utensils"></i></span><span class="sector-label">Restoran</span></button>
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="coffee"></i></span><span class="sector-label">Kafe</span></button>
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="wine"></i></span><span class="sector-label">Bar</span></button>
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="sandwich"></i></span><span class="sector-label">Fast Food</span></button>
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="croissant"></i></span><span class="sector-label">Fırın</span></button>
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="package"></i></span><span class="sector-label">Paket Servis</span></button>
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="chef-hat"></i></span><span class="sector-label">Fine Dining</span></button>
+            <!-- Extra filler to ensure overflow -->
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="utensils"></i></span><span class="sector-label">Restoran</span></button>
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="coffee"></i></span><span class="sector-label">Kafe</span></button>
+          </div>
+        </div>
+
+        <!-- ROW 2: Scrolling Right (Slower) -->
+        <div class="sector-marquee-row marquee-right">
+          <div class="marquee-track">
+            <!-- Set 2 -->
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="shopping-cart"></i></span><span class="sector-label">E-Ticaret</span></button>
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="store"></i></span><span class="sector-label">Mağaza</span></button>
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="shirt"></i></span><span class="sector-label">Moda</span></button>
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="footprints"></i></span><span class="sector-label">Spor Giyim</span></button>
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="gem"></i></span><span class="sector-label">Takı</span></button>
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="gift"></i></span><span class="sector-label">Hediyelik</span></button>
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="glasses"></i></span><span class="sector-label">Optik</span></button>
+            <!-- Set 2 Repeat -->
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="shopping-cart"></i></span><span class="sector-label">E-Ticaret</span></button>
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="store"></i></span><span class="sector-label">Mağaza</span></button>
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="shirt"></i></span><span class="sector-label">Moda</span></button>
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="footprints"></i></span><span class="sector-label">Spor Giyim</span></button>
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="gem"></i></span><span class="sector-label">Takı</span></button>
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="gift"></i></span><span class="sector-label">Hediyelik</span></button>
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="glasses"></i></span><span class="sector-label">Optik</span></button>
+            <!-- Extra filler -->
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="shopping-cart"></i></span><span class="sector-label">E-Ticaret</span></button>
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="store"></i></span><span class="sector-label">Mağaza</span></button>
+          </div>
+        </div>
+
+        <!-- ROW 3: Scrolling Left -->
+        <div class="sector-marquee-row marquee-left-slow">
+          <div class="marquee-track">
+            <!-- Set 3 -->
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="building-2"></i></span><span class="sector-label">Otel</span></button>
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="scissors"></i></span><span class="sector-label">Güzellik</span></button>
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="dumbbell"></i></span><span class="sector-label">Spor Salonu</span></button>
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="stethoscope"></i></span><span class="sector-label">Klinik</span></button>
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="smile"></i></span><span class="sector-label">Diş</span></button>
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="flower-2"></i></span><span class="sector-label">Spa</span></button>
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="sparkles"></i></span><span class="sector-label">Kuaför</span></button>
+            <!-- Set 3 Repeat -->
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="building-2"></i></span><span class="sector-label">Otel</span></button>
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="scissors"></i></span><span class="sector-label">Güzellik</span></button>
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="dumbbell"></i></span><span class="sector-label">Spor Salonu</span></button>
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="stethoscope"></i></span><span class="sector-label">Klinik</span></button>
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="smile"></i></span><span class="sector-label">Diş</span></button>
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="flower-2"></i></span><span class="sector-label">Spa</span></button>
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="sparkles"></i></span><span class="sector-label">Kuaför</span></button>
+            <!-- Extra filler -->
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="building-2"></i></span><span class="sector-label">Otel</span></button>
+            <button class="sector-btn"><span class="sector-icon"><i data-lucide="scissors"></i></span><span class="sector-label">Güzellik</span></button>
+          </div>
+        </div>
+
+        <!-- SPOTLIGHT CARD (Center Focus) -->
+        <div id="sector-spotlight" class="sector-spotlight-card">
+          <div class="spotlight-content" style="transition: all 0.5s ease;">
+            <div class="spotlight-icon-wrapper">
+              <span class="spotlight-icon"><i data-lucide="utensils" class="spotlight-lucide-icon"></i></span>
+            </div>
+            <!-- Highlight Title -->
+            <h3 class="spotlight-title text-gradient"
+              style="font-size: 1.8rem; font-weight: 800; margin-bottom: 0.5rem;">
+              Restoran Sahibi misiniz?
+            </h3>
+            <!-- Detailed Benefit Description -->
+            <p class="spotlight-desc"
+              style="font-size: 1.1rem; color: #475569; line-height: 1.6; margin-bottom: 1.5rem;">
+              Siparişleri otomatik analiz edin, mutfak maliyetlerini düşürün ve garsonlarınızın verimini artırın.
+            </p>
+            <!-- Feature Tags -->
+            <div class="spotlight-features"
+              style="display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap;">
+              <span class="feature-tag"><i data-lucide="sparkles" style="width: 14px; height: 14px; display: inline; vertical-align: middle;"></i> Stok Takibi</span>
+              <span class="feature-tag"><i data-lucide="zap" style="width: 14px; height: 14px; display: inline; vertical-align: middle;"></i> Hızlı Servis</span>
+            </div>
+
+            <p class="spotlight-subtle-slogan">
+              İşiniz büyüsün, stresiniz küçülsün...
+            </p>
+          </div>
+        </div>
+
+      </div> <!-- End sectors-overlay-text -->
+
+    </div> <!-- End Container -->
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       APPROACH SECTION - 3 Core Pillars
+  ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="approach scroll-section" id="hizmetler">
+    <!-- X-Ray Background Canvas -->
+    <canvas id="approach-xray-canvas"></canvas>
+    
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Yaklaşımımız</span>
+        <h2 class="section-title">Basit, Akıllı, <span class="text-gradient">En Verimli</span></h2>
+        <p class="section-subtitle">Yapay Zeka ile Güçlendirilmiş Yeni Nesil İş Gücü</p>
+      </div>
+
+      <div class="approach-grid">
+        <!-- User-Friendly Design -->
+        <div class="approach-card" data-color="cyan">
+          <div class="approach-card__visual">
+            <div class="visual-app-demo">
+              <div class="phone-frame">
+                <div class="phone-notch"></div>
+                <div class="phone-screen">
+                  <div class="app-layer layer-dashboard"></div>
+                  <div class="app-layer layer-restaurant"></div>
+                  <div class="app-layer layer-fashion"></div>
+                  <div class="app-layer layer-food"></div>
+                  <div class="app-layer layer-travel"></div>
+                  <div class="app-layer layer-education"></div>
+                  <div class="app-layer layer-health"></div>
+                  <div class="app-layer layer-logistics"></div>
+                  <div class="app-layer layer-finance"></div>
+                  <div class="app-layer layer-realestate"></div>
+                  <div class="cursor-pointer-dot"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <h3 class="approach-card__title">Kullanıcı Dostu Tasarım</h3>
+          <div class="approach-tags">
+            <span class="approach-tag approach-tag--primary">Sezgisel Arayüz</span>
+            <span class="approach-tag approach-tag--primary">Kod Gerektirmez</span>
+            <span class="approach-tag approach-tag--accent">Kolay Adaptasyon</span>
+          </div>
+        </div>
+
+        <!-- Intelligent Automation (Factory Workflow) -->
+        <div class="approach-card" data-color="orange">
+          <div class="approach-card__visual">
+            <div class="visual-factory">
+              <div class="factory-bg"></div>
+
+              <!-- Processing Gate (Center) -->
+              <div class="processing-gate">
+                <div class="gate-light"></div>
+                <div class="gate-scanner"></div>
+              </div>
+
+              <!-- Conveyor Belt Track -->
+              <div class="conveyor-track"></div>
+
+              <!-- Moving Items -->
+              <div class="conveyor-items">
+                <!-- Raw Items Stream (Left to Center) -->
+                <div class="stream stream-raw">
+                  <div class="c-item raw-item type-1"><span>?</span></div>
+                  <div class="c-item raw-item type-2"><span>?</span></div>
+                  <div class="c-item raw-item type-3"><span>?</span></div>
+                </div>
+
+                <!-- Processed Items Stream (Center to Right) -->
+                <div class="stream stream-done">
+                  <div class="c-item done-item type-1"><span>✓</span></div>
+                  <div class="c-item done-item type-2"><span>✓</span></div>
+                  <div class="c-item done-item type-3"><span>✓</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <h3 class="approach-card__title">Akıllı Otomasyon</h3>
+          <div class="approach-tags">
+            <span class="approach-tag approach-tag--primary">Süreç Optimizasyonu</span>
+            <span class="approach-tag approach-tag--primary">Akıllı İçgörüler</span>
+            <span class="approach-tag approach-tag--accent">Sürekli İyileştirme</span>
+          </div>
+        </div>
+
+        <!-- Maximum Efficiency -->
+        <div class="approach-card" data-color="purple">
+          <div class="approach-card__visual">
+            <div class="visual-efficiency">
+              <div class="digital-swarm">
+                <!-- Background Grid -->
+                <div class="swarm-grid"></div>
+
+                <!-- Swarm Units (Workers) -->
+                <!-- Horizontal Workers -->
+                <div class="swarm-unit h-unit u1"></div>
+                <div class="swarm-unit h-unit u2"></div>
+                <div class="swarm-unit h-unit u3"></div>
+                <div class="swarm-unit h-unit u4"></div>
+                <div class="swarm-unit h-unit u5"></div>
+                <div class="swarm-unit h-unit u6"></div>
+
+                <!-- Vertical Workers -->
+                <div class="swarm-unit v-unit u7"></div>
+                <div class="swarm-unit v-unit u8"></div>
+                <div class="swarm-unit v-unit u9"></div>
+                <div class="swarm-unit v-unit u10"></div>
+                <div class="swarm-unit v-unit u11"></div>
+                <div class="swarm-unit v-unit u12"></div>
+              </div>
+            </div>
+          </div>
+          <h3 class="approach-card__title">Maksimum Verimlilik</h3>
+          <div class="approach-tags">
+            <span class="approach-tag approach-tag--primary">En Verimli Çıktı</span>
+            <span class="approach-tag approach-tag--primary">Yüksek Performans</span>
+            <span class="approach-tag approach-tag--accent">Yeni İş Gücü</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       GALAXY AI CHAT SECTION
+  ═══════════════════════════════════════════════════════════════════════ -->
+    <section id="galaxy-chat-section" class="scroll-section">
+      <!-- Starry Background -->
+      <canvas id="galaxy-canvas"></canvas>
+
+      <div class="galaxy-content-wrapper">
+        <!-- Main Chat Area -->
+        <div class="galaxy-chat-container">
+          
+          <!-- Welcome Screen (Initial State) -->
+          <div class="galaxy-welcome" id="galaxy-welcome">
+            <h2 class="welcome-title">Merhaba, <span class="gradient-text">Nasıl yardımcı olabilirim?</span></h2>
+            <div class="welcome-grid">
+              <div class="welcome-card" onclick="document.getElementById('galaxy-input').value='Restoran maliyetlerini nasıl düşürebilirim?'; document.getElementById('galaxy-submit').click();">
+                <span class="card-icon"><i data-lucide="utensils"></i></span>
+                <p>Restoran verimliliği için ipuçları al</p>
+              </div>
+              <div class="welcome-card" onclick="document.getElementById('galaxy-input').value='E-ticaret dönüşüm oranlarını nasıl artırırım?'; document.getElementById('galaxy-submit').click();">
+                <span class="card-icon"><i data-lucide="shopping-cart"></i></span>
+                <p>Satışları artıracak stratejiler keşfet</p>
+              </div>
+              <div class="welcome-card" onclick="document.getElementById('galaxy-input').value='Okeep AI nasıl çalışır?'; document.getElementById('galaxy-submit').click();">
+                <span class="card-icon"><i data-lucide="sparkles"></i></span>
+                <p>Okeep'in gücünü öğren</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chat History -->
+          <div class="galaxy-history" id="galaxy-history">
+            <!-- Messages will appear here -->
+          </div>
+
+          <!-- Controls (Input + Suggestions) -->
+          <div class="galaxy-controls">
+            <!-- Suggestions (will be moved here or kept as chips) -->
+            <div class="galaxy-suggestions" id="galaxy-suggestions"></div>
+
+            <!-- Input Area -->
+            <div class="galaxy-input-area">
+              <input type="text" id="galaxy-input" class="galaxy-input" placeholder="Okeep AI'ya bir şey sorun..." autocomplete="off">
+              <button id="galaxy-submit" class="galaxy-submit">
+                <svg viewBox="0 0 24 24" fill="none" width="24" height="24">
+                  <path d="M7 11L12 6L17 11M12 18V7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+            <p class="galaxy-disclaimer">Okeep AI bazen yanlış bilgi verebilir. Önemli bilgileri kontrol edin.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       TEAM SECTION
+  ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="team scroll-section" id="ekip">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Ekibimiz</span>
+        <h2 class="section-title">Arkasındaki <span class="text-gradient">Beyinler</span></h2>
+        <p class="section-subtitle">Tutkulu, yaratıcı ve çözüm odaklı bir ekip</p>
+      </div>
+
+      <div class="team-grid">
+        <!-- Team Member 1 - Musa Soylu -->
+        <div class="team-card">
+          <div class="team-avatar">
+            <i data-lucide="palette" class="team-avatar-icon"></i>
+          </div>
+          <h3 class="team-name">Musa Soylu</h3>
+          <p class="team-role">Tasarımcı</p>
+          <p class="team-bio">Kullanıcı deneyimi ve görsel tasarım uzmanı. Estetik ile işlevselliği harmanlıyor.</p>
+          <div class="team-social">
+            <a href="https://www.linkedin.com/in/musa-soylu-2513ba173/" target="_blank" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+          </div>
+        </div>
+
+        <!-- Team Member 2 - Nazlı Nehir Sertbaş -->
+        <div class="team-card">
+          <div class="team-avatar">
+            <i data-lucide="scale" class="team-avatar-icon"></i>
+          </div>
+          <h3 class="team-name">Nazlı Nehir Sertbaş</h3>
+          <p class="team-role">Hukuk Danışmanı</p>
+          <p class="team-bio">Şirket hukuku ve sözleşme yönetimi uzmanı. Yasal süreçlerde güvenilir rehber.</p>
+          <div class="team-social">
+            <a href="mailto:nazli.s.sertbas@gsghukuk.com" aria-label="Email"><i data-lucide="mail"></i></a>
+          </div>
+        </div>
+
+        <!-- Team Member 3 - Hasan Tatar -->
+        <div class="team-card">
+          <div class="team-avatar">
+            <i data-lucide="code" class="team-avatar-icon"></i>
+          </div>
+          <h3 class="team-name">Hasan Tatar</h3>
+          <p class="team-role">Yazılım Geliştirici</p>
+          <p class="team-bio">Full-stack geliştirici. Modern web teknolojileri ve kullanıcı deneyimi odaklı.</p>
+          <div class="team-social">
+            <a href="https://www.linkedin.com/in/wazder/" target="_blank" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+            <a href="https://github.com/wazder" target="_blank" aria-label="GitHub"><i data-lucide="github"></i></a>
+          </div>
+        </div>
+
+        <!-- Team Member 4 - Umut Gökmen -->
+        <div class="team-card">
+          <div class="team-avatar">
+            <i data-lucide="code" class="team-avatar-icon"></i>
+          </div>
+          <h3 class="team-name">Umut Gökmen</h3>
+          <p class="team-role">Yazılım Geliştirici</p>
+          <p class="team-bio">Backend ve sistem mimarisi uzmanı. Ölçeklenebilir çözümler geliştiriyor.</p>
+          <div class="team-social">
+            <a href="https://www.linkedin.com/in/umutgokmen/" target="_blank" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+            <a href="https://github.com/umutgokmen" target="_blank" aria-label="GitHub"><i data-lucide="github"></i></a>
+          </div>
+        </div>
+
+        <!-- Team Member 5 - Furkan Bora -->
+        <div class="team-card">
+          <div class="team-avatar">
+            <i data-lucide="code" class="team-avatar-icon"></i>
+          </div>
+          <h3 class="team-name">Furkan Bora</h3>
+          <p class="team-role">Yazılım Geliştirici</p>
+          <p class="team-bio">Yazılım mühendisi. Performans optimizasyonu ve temiz kod mimarisi.</p>
+          <div class="team-social">
+            <a href="https://www.linkedin.com/in/furkan-bora/" target="_blank" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       CONTACT SECTION
+  ═══════════════════════════════════════════════════════════════════════ -->
+  <section class="contact scroll-section" id="iletisim">
+    <div class="container">
+      <div class="contact-content">
+        <div class="contact-info">
+          <span class="section-tag">İletişim</span>
+          <h2 class="section-title">Haydi, <span class="text-gradient">Tanışalım!</span></h2>
+          <p class="contact-desc">
+            İşletmenizi bir üst seviyeye taşımaya hazır mısınız?
+            Ücretsiz bir demo için hemen iletişime geçin.
+          </p>
+
+          <div class="contact-details">
+            <a href="mailto:destek@okeep.ai" class="contact-link">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                  stroke="currentColor" stroke-width="2" />
+                <path d="M22 6l-10 7L2 6" stroke="currentColor" stroke-width="2" />
+              </svg>
+              destek@okeep.ai
+            </a>
+            <a href="tel:+90XXXXXXXXXX" class="contact-link">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"
+                  stroke="currentColor" stroke-width="2" />
+              </svg>
+              +90 XXX XXX XX XX
+            </a>
+            <span class="contact-location">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="currentColor" stroke-width="2" />
+                <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2" />
+              </svg>
+              Muus Coffee, Cihangir, İstanbul, Türkiye
+            </span>
+          </div>
+        </div>
+
+        <form class="contact-form" id="contact-form">
+          <div class="form-group">
+            <input type="text" id="name" name="name" placeholder="Adınız" required>
+          </div>
+          <div class="form-group">
+            <input type="email" id="email" name="email" placeholder="E-posta Adresiniz" required>
+          </div>
+          <div class="form-group">
+            <textarea id="message" name="message" placeholder="Mesajınız" rows="4"></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary btn--full">
+            Gönder
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M14 2L7 9M14 2l-4 12-3-5-5-3 12-4z" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
+        </form>
+      </div>
+    </div>
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         FOOTER (Integrated into Contact Section for Scroll Snap)
+    ═══════════════════════════════════════════════════════════════════════ -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__content">
+          <div class="footer__brand">
+            <span class="logo-text">okeep</span>
+            <p>İşletmelerin dijital dönüşüm partneri.</p>
+          </div>
+          <div class="footer__links">
+            <a href="#sektorler-snap">Çözümler</a>
+            <a href="#hizmetler">Hizmetler</a>
+            <a href="#ekip">Ekip</a>
+          </div>
+        </div>
+        <div class="footer__bottom">
+          <p>&copy; 2026 Okeep. Tüm hakları saklıdır.</p>
+          <p class="footer__made">Made with <i data-lucide="heart" style="width: 14px; height: 14px; display: inline; vertical-align: middle; color: #ec4899;"></i> in Istanbul</p>
+        </div>
+      </div>
+    </footer>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════════════════════════════════ -->
+
+
+  <!-- Scripts -->
+</body>
+
+</html>
