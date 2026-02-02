@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite'
 
 export default defineConfig({
-  base: '/okeep-web-1/',
+  base: '/',
   server: {
     port: 3000,
     open: true
