@@ -8,6 +8,16 @@
    Strict "Slide-Like" Navigation (One scroll = One page)
 ═══════════════════════════════════════════════════════════════════════ */
 
+// Space theme colors - progressively darker
+const SPACE_COLORS = [
+    { r: 30, g: 30, b: 63 },    // #1e1e3f - Hero (lightest space)
+    { r: 22, g: 22, b: 43 },    // #16162b - Sectors
+    { r: 15, g: 15, b: 35 },    // #0f0f23 - Approach
+    { r: 10, g: 10, b: 26 },    // #0a0a1a - Galaxy Chat (stays same)
+    { r: 8, g: 8, b: 20 },      // #080814 - Team
+    { r: 5, g: 5, b: 16 },      // #050510 - Contact (darkest)
+];
+
 // Disable browser's automatic scroll restoration
 if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
@@ -26,6 +36,25 @@ export function initFullPageScroll() {
     const scrollDelay = 600;
 
     // ─────────────────────────────────────────────────────────────────
+    // Background Color Transition
+    // ─────────────────────────────────────────────────────────────────
+    function updateBackgroundColor(index) {
+        const color = SPACE_COLORS[Math.min(index, SPACE_COLORS.length - 1)];
+        const bgColor = `rgb(${color.r}, ${color.g}, ${color.b})`;
+        
+        // Smooth transition on body
+        document.body.style.transition = 'background-color 0.6s ease';
+        document.body.style.backgroundColor = bgColor;
+        
+        // Also update canvas container
+        const canvasBg = document.getElementById('global-canvas-bg');
+        if (canvasBg) {
+            canvasBg.style.transition = 'background-color 0.6s ease';
+            canvasBg.style.backgroundColor = bgColor;
+        }
+    }
+
+    // ─────────────────────────────────────────────────────────────────
     // Helper Functions (defined first)
     // ─────────────────────────────────────────────────────────────────
     function scrollToSection(index, behavior = 'smooth') {
@@ -41,6 +70,9 @@ export function initFullPageScroll() {
 
         // Update scroll indicator
         updateScrollIndicator(index);
+        
+        // Update background color based on section
+        updateBackgroundColor(index);
 
         // Dispatch Custom Event for external modules
         const event = new CustomEvent('sectionChanged', {
