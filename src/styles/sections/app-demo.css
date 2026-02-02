@@ -1,0 +1,1001 @@
+/* 
+   APP DEMO ANIMATION (Integrated UI View)
+   Clean, flat, rational presentation. 
+   No "fake device" frames. The card IS the view.
+*/
+.visual-app-demo {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    display: block;
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+/* UI Container */
+.phone-frame {
+    width: 100%;
+    height: 100%;
+    background: #0f172a;
+    position: relative;
+    border-radius: 0;
+    box-shadow: none;
+    transform: none;
+    overflow: hidden;
+}
+
+.approach-card:hover .phone-frame {
+    transform: none;
+    box-shadow: none;
+}
+
+.phone-frame::after {
+    display: none;
+}
+
+.phone-notch {
+    display: none;
+}
+
+.phone-screen {
+    width: 100%;
+    height: 100%;
+    background: #f8fafc;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 
+  MULTI-APP LAYERS 
+*/
+.app-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: 100% auto;
+    background-position: top center;
+    background-repeat: no-repeat;
+    will-change: opacity, transform;
+}
+
+/* Layer 1: Dashboard */
+.layer-dashboard {
+    background-image: url('../../assets/app-ui-long.png');
+    animation: seqDashboard 27s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
+}
+
+/* Layer 2: Rapid Switch Sequence (Varied Sectors) */
+.layer-restaurant {
+    background-image: url('../../assets/app-restaurant.png');
+    opacity: 0;
+    animation: seqRestaurant 27s step-end infinite;
+}
+
+.layer-fashion {
+    background-image: url('../../assets/app-fashion.png');
+    opacity: 0;
+    animation: seqFashion 27s step-end infinite;
+}
+
+.layer-food {
+    background-image: url('../../assets/app-food.png');
+    opacity: 0;
+    animation: seqFood 27s step-end infinite;
+}
+
+.layer-travel {
+    background-image: url('../../assets/app-travel.png');
+    opacity: 0;
+    animation: seqTravel 27s step-end infinite;
+}
+
+.layer-education {
+    background-image: url('../../assets/app-education.png');
+    opacity: 0;
+    animation: seqEducation 27s step-end infinite;
+}
+
+.layer-health {
+    background-image: url('../../assets/app-health.png');
+    opacity: 0;
+    animation: seqHealth 27s step-end infinite;
+}
+
+.layer-logistics {
+    background-image: url('../../assets/app-logistics.png');
+    opacity: 0;
+    animation: seqLogistics 27s step-end infinite;
+}
+
+.layer-finance {
+    background-image: url('../../assets/app-finance.png');
+    opacity: 0;
+    animation: seqFinance 27s step-end infinite;
+}
+
+/* Layer 3: Real Estate (Final View) */
+.layer-realestate {
+    background-image: url('../../assets/app-realestate.png');
+    opacity: 0;
+    animation: seqRealEstate 27s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
+}
+
+/* 
+   TIMELINE (27s Loop) - 3s per App
+   0-3: Dashboard
+   3-6: Restaurant
+   6-9: Fashion
+   9-12: Food (New)
+   12-15: Travel (New)
+   15-18: Education (New)
+   18-21: Health
+   21-24: Finance
+   24-27: Real Estate
+*/
+
+@keyframes seqDashboard {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    10% {
+        transform: translateY(-5%);
+    }
+
+    11% {
+        opacity: 1;
+    }
+
+    12% {
+        opacity: 0;
+    }
+
+    95% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes seqRestaurant {
+
+    0%,
+    11% {
+        opacity: 0;
+    }
+
+    12% {
+        opacity: 1;
+    }
+
+    22% {
+        opacity: 1;
+    }
+
+    23% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes seqFashion {
+
+    0%,
+    22% {
+        opacity: 0;
+    }
+
+    23% {
+        opacity: 1;
+    }
+
+    33% {
+        opacity: 1;
+    }
+
+    34% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes seqFood {
+
+    0%,
+    33% {
+        opacity: 0;
+    }
+
+    34% {
+        opacity: 1;
+    }
+
+    44% {
+        opacity: 1;
+    }
+
+    45% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes seqTravel {
+
+    0%,
+    44% {
+        opacity: 0;
+    }
+
+    45% {
+        opacity: 1;
+    }
+
+    55% {
+        opacity: 1;
+    }
+
+    56% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes seqEducation {
+
+    0%,
+    55% {
+        opacity: 0;
+    }
+
+    56% {
+        opacity: 1;
+    }
+
+    66% {
+        opacity: 1;
+    }
+
+    67% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes seqHealth {
+
+    0%,
+    66% {
+        opacity: 0;
+    }
+
+    67% {
+        opacity: 1;
+    }
+
+    77% {
+        opacity: 1;
+    }
+
+    78% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes seqLogistics {
+
+    0%,
+    77% {
+        opacity: 0;
+    }
+
+    78% {
+        opacity: 1;
+    }
+
+    88% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes seqFinance {
+
+    0%,
+    77% {
+        opacity: 0;
+    }
+
+    78% {
+        opacity: 1;
+    }
+
+    88% {
+        opacity: 1;
+    }
+
+    89% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes seqRealEstate {
+
+    0%,
+    88% {
+        opacity: 0;
+        transform: translateY(0);
+    }
+
+    89% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    96% {
+        transform: translateY(-15%);
+    }
+
+    98% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(0);
+    }
+}
+
+/* FAB */
+.app-floating-btn {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, var(--color-cyan), var(--color-cyan-light));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 212, 170, 0.3);
+    z-index: 25;
+    transform: scale(0);
+    animation: fabVis 27s ease infinite;
+}
+
+@keyframes fabVis {
+
+    0%,
+    15% {
+        transform: scale(1);
+    }
+
+    17%,
+    100% {
+        transform: scale(0);
+    }
+}
+
+.app-floating-btn svg {
+    width: 24px;
+    height: 24px;
+    stroke-width: 2.5;
+}
+
+/* Cursor Logic */
+.cursor-pointer-dot {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    border: 2px solid rgba(0, 212, 170, 0.8);
+    border-radius: 50%;
+    background: rgba(0, 212, 170, 0.2);
+    top: 50%;
+    left: 50%;
+    z-index: 40;
+    opacity: 0;
+    pointer-events: none;
+    animation: cursorSeq 27s ease-in-out infinite;
+}
+
+@keyframes cursorSeq {
+
+    0%,
+    57% {
+        opacity: 0;
+    }
+
+    /* Appear on Real Estate List */
+    89% {
+        opacity: 1;
+        top: 60%;
+        left: 50%;
+        transform: scale(1);
+    }
+
+    95% {
+        opacity: 1;
+        top: 60%;
+        left: 50%;
+        transform: scale(0.8);
+    }
+
+    98%,
+    100% {
+        opacity: 0;
+    }
+}
+
+/* 
+   MAXIMUM EFFICIENCY (Card 3) - Digital Workforce (Swarm)
+   - Grid-based layout
+   - Multiple agents moving rapidly (Digital Hive)
+   - "Busy" atmosphere
+*/
+.visual-efficiency {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #0f172a;
+    /* Slate 900 */
+}
+
+.digital-swarm {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+/* Background Grid */
+.swarm-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 20px 20px;
+    opacity: 0.5;
+}
+
+/* Worker Units */
+.swarm-unit {
+    position: absolute;
+    background: #fff;
+    border-radius: 2px;
+    box-shadow: 0 0 8px currentColor;
+    opacity: 0;
+    /* Hidden by default, shown in animation */
+}
+
+.h-unit {
+    width: 12px;
+    height: 4px;
+    color: #06b6d4;
+    /* Cyan shadow */
+    background: #06b6d4;
+}
+
+.v-unit {
+    width: 4px;
+    height: 12px;
+    color: #a855f7;
+    /* Purple shadow */
+    background: #a855f7;
+}
+
+/* Animations - Horizontal Movement */
+@keyframes zipRight {
+    0% {
+        left: -10%;
+        opacity: 0;
+        transform: scaleX(0.5);
+    }
+
+    10% {
+        opacity: 1;
+        transform: scaleX(1.5);
+    }
+
+    90% {
+        opacity: 1;
+        transform: scaleX(1.5);
+    }
+
+    100% {
+        left: 110%;
+        opacity: 0;
+        transform: scaleX(0.5);
+    }
+}
+
+@keyframes zipLeft {
+    0% {
+        left: 110%;
+        opacity: 0;
+        transform: scaleX(0.5);
+    }
+
+    10% {
+        opacity: 1;
+        transform: scaleX(1.5);
+    }
+
+    90% {
+        opacity: 1;
+        transform: scaleX(1.5);
+    }
+
+    100% {
+        left: -10%;
+        opacity: 0;
+        transform: scaleX(0.5);
+    }
+}
+
+/* Animations - Vertical Movement */
+@keyframes zipDown {
+    0% {
+        top: -10%;
+        opacity: 0;
+        transform: scaleY(0.5);
+    }
+
+    10% {
+        opacity: 1;
+        transform: scaleY(1.5);
+    }
+
+    90% {
+        opacity: 1;
+        transform: scaleY(1.5);
+    }
+
+    100% {
+        top: 110%;
+        opacity: 0;
+        transform: scaleY(0.5);
+    }
+}
+
+@keyframes zipUp {
+    0% {
+        top: 110%;
+        opacity: 0;
+        transform: scaleY(0.5);
+    }
+
+    10% {
+        opacity: 1;
+        transform: scaleY(1.5);
+    }
+
+    90% {
+        opacity: 1;
+        transform: scaleY(1.5);
+    }
+
+    100% {
+        top: -10%;
+        opacity: 0;
+        transform: scaleY(0.5);
+    }
+}
+
+/* Assignments */
+/* Horizontal Workers */
+.u1 {
+    top: 20%;
+    animation: zipRight 3s linear infinite;
+    animation-delay: 0s;
+}
+
+.u2 {
+    top: 40%;
+    animation: zipLeft 4s linear infinite;
+    animation-delay: 1.5s;
+}
+
+.u3 {
+    top: 60%;
+    animation: zipRight 2.5s linear infinite;
+    animation-delay: 0.5s;
+}
+
+.u4 {
+    top: 80%;
+    animation: zipLeft 3.5s linear infinite;
+    animation-delay: 1s;
+}
+
+.u5 {
+    top: 30%;
+    animation: zipRight 5s linear infinite;
+    animation-delay: 2.2s;
+}
+
+.u6 {
+    top: 70%;
+    animation: zipLeft 3s linear infinite;
+    animation-delay: 0.2s;
+}
+
+/* Vertical Workers */
+.u7 {
+    left: 20%;
+    animation: zipDown 2.8s linear infinite;
+    animation-delay: 0.8s;
+}
+
+.u8 {
+    left: 40%;
+    animation: zipUp 3.2s linear infinite;
+    animation-delay: 2s;
+}
+
+.u9 {
+    left: 60%;
+    animation: zipDown 4.5s linear infinite;
+    animation-delay: 0.1s;
+}
+
+.u10 {
+    left: 80%;
+    animation: zipUp 3s linear infinite;
+    animation-delay: 1.2s;
+}
+
+.u11 {
+    left: 30%;
+    animation: zipDown 3.8s linear infinite;
+    animation-delay: 2.5s;
+}
+
+.u12 {
+    left: 70%;
+    animation: zipUp 2.5s linear infinite;
+    animation-delay: 0.5s;
+}
+
+/* 
+   FACTORY WORKFLOW (Card 2) - Automation
+*/
+/* 
+   FACTORY WORKFLOW (Card 2) - Professional Conveyor Belt
+   - Isometric / Perspective View
+   - Smooth Continuous Flow
+*/
+.visual-factory {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #f1f5f9;
+    /* Slate 100 */
+    perspective: 1000px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* The Floor/Base */
+.visual-factory::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background-image:
+        linear-gradient(45deg, #e2e8f0 25%, transparent 25%),
+        linear-gradient(-45deg, #e2e8f0 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #e2e8f0 75%),
+        linear-gradient(-45deg, transparent 75%, #e2e8f0 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    opacity: 0.3;
+    transform: rotateX(60deg) scale(2);
+    top: -50%;
+}
+
+/* Conveyor Track */
+.conveyor-track {
+    position: absolute;
+    width: 140%;
+    /* Extend beyond edges */
+    height: 40px;
+    background: #334155;
+    /* Slate 700 */
+    top: 60%;
+    left: -20%;
+    transform: rotateX(45deg) rotateY(0deg);
+    border-radius: 4px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    /* Moving Texture */
+    background-image: repeating-linear-gradient(90deg,
+            #475569 0px,
+            #475569 2px,
+            #334155 2px,
+            #334155 20px);
+    animation: beltScroll 1s linear infinite;
+    z-index: 2;
+}
+
+@keyframes beltScroll {
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: 20px 0;
+    }
+}
+
+/* Processing Gate (The "Scanner" Machine) */
+.processing-gate {
+    position: absolute;
+    width: 60px;
+    height: 120px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    z-index: 10;
+    pointer-events: none;
+}
+
+/* The Arch */
+.processing-gate::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 80%;
+    border: 6px solid #e2e8f0;
+    border-bottom: none;
+    border-radius: 12px 12px 0 0;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    bottom: 0;
+    left: 0;
+}
+
+/* The Scanner Light Beam */
+.gate-scanner {
+    position: absolute;
+    top: 20%;
+    left: 5%;
+    width: 90%;
+    height: 2px;
+    background: #f97316;
+    /* Orange */
+    box-shadow: 0 0 10px #f97316, 0 0 20px #f97316;
+    animation: scanBeam 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes scanBeam {
+    from {
+        top: 20%;
+        opacity: 0.5;
+    }
+
+    to {
+        top: 70%;
+        opacity: 1;
+    }
+}
+
+/* Status Light on Top */
+.gate-light {
+    position: absolute;
+    top: 5px;
+    right: -5px;
+    width: 8px;
+    height: 8px;
+    background: #22c55e;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #22c55e;
+    animation: blinkLight 2s infinite;
+}
+
+@keyframes blinkLight {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.3;
+    }
+}
+
+/* Items Container */
+.conveyor-items {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    transform-style: preserve-3d;
+}
+
+.c-item {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    top: 55%;
+    /* Align with belt */
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    will-change: transform, left, opacity;
+}
+
+/* RAW ITEMS (Chaotic/Unprocessed) */
+.raw-item {
+    background: #fff;
+    border: 2px dashed #94a3b8;
+    color: #94a3b8;
+    transform: translateY(-50%) rotateY(-20deg);
+    /* Slight 3D feel */
+}
+
+/* DONE ITEMS (Polished) */
+.done-item {
+    background: linear-gradient(135deg, #f97316, #fb923c);
+    border: 2px solid #fff;
+    color: #fff;
+    box-shadow: 0 0 15px rgba(249, 115, 22, 0.4);
+    transform: translateY(-50%) rotateY(-20deg);
+}
+
+/* 
+   Animation Logic 
+   Total Cycle: 2s per item pair, loops infinitely.
+   We stagger 3 items to create a continuous stream.
+*/
+
+.stream-raw .c-item {
+    opacity: 0;
+}
+
+.stream-done .c-item {
+    opacity: 0;
+}
+
+/* KEYFRAMES FOR MOVEMENT */
+
+/* Raw: Enters Left -> Moves to Center -> Vanishes */
+@keyframes moveRaw {
+    0% {
+        left: -10%;
+        opacity: 0;
+        transform: translateY(-50%) scale(0.8) rotate(-15deg);
+    }
+
+    10% {
+        opacity: 1;
+        transform: translateY(-50%) scale(1) rotate(-5deg);
+    }
+
+    45% {
+        opacity: 1;
+        transform: translateY(-50%) scale(1) rotate(0deg);
+    }
+
+    50% {
+        left: 50%;
+        /* Center */
+        opacity: 0;
+        transform: translateY(-50%) scale(0.5);
+        /* Sucked into machine */
+    }
+
+    100% {
+        left: 50%;
+        opacity: 0;
+    }
+}
+
+/* Done: Appears Center -> Moves Right -> Exits */
+@keyframes moveDone {
+    0% {
+        left: 50%;
+        opacity: 0;
+    }
+
+    49% {
+        left: 50%;
+        opacity: 0;
+        transform: translateY(-50%) scale(0.5);
+    }
+
+    50% {
+        left: 50%;
+        opacity: 1;
+        transform: translateY(-50%) scale(1);
+        /* Spits out */
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        left: 110%;
+        opacity: 0;
+        transform: translateY(-50%) scale(1);
+    }
+}
+
+/* Staggering the items */
+/* Duration: 6s total loop effectively, with 2s interval */
+
+.stream-raw .type-1 {
+    animation: moveRaw 6s linear infinite;
+    animation-delay: 0s;
+}
+
+.stream-raw .type-2 {
+    animation: moveRaw 6s linear infinite;
+    animation-delay: 2s;
+}
+
+.stream-raw .type-3 {
+    animation: moveRaw 6s linear infinite;
+    animation-delay: 4s;
+}
+
+.stream-done .type-1 {
+    animation: moveDone 6s linear infinite;
+    animation-delay: 0s;
+}
+
+.stream-done .type-2 {
+    animation: moveDone 6s linear infinite;
+    animation-delay: 2s;
+}
+
+.stream-done .type-3 {
+    animation: moveDone 6s linear infinite;
+    animation-delay: 4s;
+}
