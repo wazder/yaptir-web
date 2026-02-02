@@ -8,9 +8,9 @@ const CONFIG = {
     dotSpacing: 32,           // Wider spacing
     baseDotSize: 1.5,         // Small, elegant dots
     mouseRadius: 140,         // Radius of mouse repulsion effect
-    dotColor: '#94a3b8',      // Slate-400 (Darker for visibility)
-    lineColor: '#94a3b8',     // Slate-400 (Matching darker dots)
-    lineOpacity: 0.12,        // Slightly more visible ghost thread
+    dotColor: 'rgba(148, 163, 184, 0.6)',      // Slate-400 with transparency for space
+    lineColor: 'rgba(148, 163, 184, 0.4)',     // Slate-400 lighter for space
+    lineOpacity: 0.1,         // Subtle ghost thread
     lineTension: 1.1,         // Threshold ratio for line breaking
     flowColor: '#7C3AED',     // Flow connection color (purple)
     animationSpeed: 0.05,     // How fast dots animate back
