@@ -3,6 +3,10 @@
    Orchestrates all interactions and animations
 ═══════════════════════════════════════════════════════════════════════ */
 
+// Import CSS
+import './styles/main.css';
+import './styles/sections/galaxy-chat.css';
+
 import { initHeroCanvas } from './modules/heroCanvas.js';
 import { initScrollAnimations, initMarqueeParallax, initCanvasModeObserver } from './modules/scrollAnimations.js';
 import { initThemeSwitcher } from './core/themeSwitcher.js';
