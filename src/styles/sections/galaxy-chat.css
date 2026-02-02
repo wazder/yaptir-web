@@ -206,6 +206,13 @@
     overflow-x: auto;
     scrollbar-width: none;
     padding: 0.2rem 0;
+    order: 2; /* Move suggestions below input */
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.galaxy-input-area {
+    order: 1; /* Input comes first */
 }
 
 .galaxy-suggestions::-webkit-scrollbar { display: none; }
@@ -292,6 +299,7 @@
     color: #64748b;
     text-align: center;
     margin: 0.5rem 0 0;
+    order: 3; /* Disclaimer comes last */
 }
 
 /* ─── Responsiveness ─── */
