@@ -7,43 +7,43 @@
 export const sectorsData = [
     // ─── Yeme & İçme ───
     {
-        icon: '🍕', label: 'Restoran',
+        icon: 'utensils', label: 'Restoran',
         title: 'Restoranınız İçin Yapay Zeka',
         desc: 'Müşteri yorumlarını analiz edin, yoğun saatlere göre personel planlayın ve stok maliyetlerini %20 düşürün.',
         features: ['Otomatik Stok', 'Yorum Analizi', 'Akıllı Vardiya']
     },
     {
-        icon: '☕', label: 'Kafe',
+        icon: 'coffee', label: 'Kafe',
         title: 'Kahve Dükkanınızın Yeni Beyni',
         desc: 'Sadakat programlarını kişiselleştirin, kahve tüketimine göre sipariş tahminleri yapın. Baristanız sadece kahve yapsın.',
         features: ['QR Menü', 'Sadakat Analizi', 'Tedarik Planı']
     },
     {
-        icon: '🍸', label: 'Bar',
+        icon: 'wine', label: 'Bar',
         title: 'Gece Hayatında Veri Odaklı Akış',
         desc: 'En popüler kokteylleri belirleyin, stok kayıplarını en aza indirin ve müşteri yoğunluğunu ısı haritasıyla izleyin.',
         features: ['Stok Takibi', 'Popüler Ürünler', 'Maliyet Analizi']
     },
     {
-        icon: '🍔', label: 'Fast Food',
+        icon: 'sandwich', label: 'Fast Food',
         title: 'Hız Tutkunlarına Hızlı Servis',
         desc: 'Sipariş sürelerini milisaniyelerle ölçün, yoğunluk anında mutfak operasyonunu otomatik optimize edin.',
         features: ['Hız Analizi', 'Kiosk Entegre', 'Tahminleme']
     },
     {
-        icon: '🥐', label: 'Fırın',
+        icon: 'croissant', label: 'Fırın',
         title: 'Taze Ürün, Sıfır Atık',
         desc: 'Günlük üretim miktarını hava durumu ve geçmiş satışlara göre belirleyin. Akşam raflarınız boş, kasanız dolu kalsın.',
         features: ['Üretim Planı', 'Atık Yönetimi', 'Talep Tahmini']
     },
     {
-        icon: '🥡', label: 'Paket Servis',
+        icon: 'package', label: 'Paket Servis',
         title: 'Kurye Operasyonunda Tam Kontrol',
         desc: 'Teslimat rotalarını optimize edin, kurye performansını izleyin ve müşteri memnuniyetini zirveye taşıyın.',
         features: ['Rota Optimizasyonu', 'Sıcak Teslimat', 'Kurye Takip']
     },
     {
-        icon: '🍽️', label: 'Fine Dining',
+        icon: 'chef-hat', label: 'Fine Dining',
         title: 'Kusursuz Misafir Deneyimi',
         desc: 'VIP müşterilerinizi tanıyın, rezervasyon geçmişine göre özel öneriler sunun ve servis kalitesini standartlaştırın.',
         features: ['VIP CRM', 'Rezervasyon AI', 'Özel Menü']
@@ -51,43 +51,43 @@ export const sectorsData = [
 
     // ─── Perakende & Mağazacılık ───
     {
-        icon: '🛒', label: 'E-Ticaret',
+        icon: 'shopping-cart', label: 'E-Ticaret',
         title: 'E-Ticarette Dönüşüm Rekorları',
         desc: 'Sepet terk edenleri geri kazanın ve müşterilerinize tam olarak aradıkları ürünleri önerin.',
         features: ['Sepet Analizi', 'Kişisel Öneri', 'Dinamik Fiyat']
     },
     {
-        icon: '🛍️', label: 'Mağaza',
+        icon: 'store', label: 'Mağaza',
         title: 'Mağaza İçi Akıllı Analitik',
         desc: 'Vitrin önünden geçenlerin kaçı içeri girdi? Hangi reyon daha sıcak? Fiziksel mağazanızı web siteniz gibi ölçün.',
         features: ['Kişi Sayma', 'Sıcaklık Haritası', 'Vitrin Analizi']
     },
     {
-        icon: '👗', label: 'Moda',
+        icon: 'shirt', label: 'Moda',
         title: 'Trendleri Yapay Zeka ile Yakala',
         desc: 'Gelecek sezonun renklerini ve modellerini bugünden tahmin edin. Stoklarınızı moda akımlarına göre yönetin.',
         features: ['Trend Analizi', 'Stok Devir', 'Kombin Önerisi']
     },
     {
-        icon: '👟', label: 'Spor Giyim',
+        icon: 'footprints', label: 'Spor Giyim',
         title: 'Performans Odaklı Perakende',
         desc: 'Sporcu müşterilerinizin aktivitelerine göre ürün önerin. Mevsimsel değişimlere hazırlıklı olun.',
         features: ['Sezon Planı', 'Aktivite Hedefli', 'Stok Yönetimi']
     },
     {
-        icon: '💍', label: 'Takı',
+        icon: 'gem', label: 'Takı',
         title: 'Değerli Anlar İçin Özel Seçimler',
         desc: 'Müşterilerinizin özel günlerini hatırlayın ve onlara en uygun hediye seçeneklerini otomatik sunun.',
         features: ['Özel Gün Hatırlatıcı', 'Hediye Asistanı', 'CRM']
     },
     {
-        icon: '🎁', label: 'Hediyelik',
+        icon: 'gift', label: 'Hediyelik',
         title: 'Hediye Seçimini Kolaylaştırın',
         desc: 'Kararsız müşterilere saniyeler içinde en doğru hediye profilini çıkaran akıllı asistan.',
         features: ['Hediye Botu', 'Trend Ürünler', 'Paketleme']
     },
     {
-        icon: '👓', label: 'Optik',
+        icon: 'glasses', label: 'Optik',
         title: 'Görsel Seçimde Dijital Asistan',
         desc: 'Yüz şekline en uygun çerçeveyi öneren algoritmalar ile müşteri karar sürecini kısaltın.',
         features: ['Çerçeve Önerisi', 'Yüz Analizi', 'Stok Takibi']
@@ -95,43 +95,43 @@ export const sectorsData = [
 
     // ─── Hizmet & Bakım ───
     {
-        icon: '🏨', label: 'Otel',
+        icon: 'building-2', label: 'Otel',
         title: 'Misafir Memnuniyetinde Mükemmellik',
         desc: 'Check-in yoğunluğunu tahmin edin, oda servisi tercihlerini öğrenin ve 7/24 dijital konsiyerj hizmeti sunun.',
         features: ['Akıllı Check-in', 'Talep Tahmini', 'Dijital Asistan']
     },
     {
-        icon: '💈', label: 'Güzellik',
+        icon: 'scissors', label: 'Güzellik',
         title: 'Randevu Doluluğunu Artırın',
         desc: 'Son dakika iptallerini otomatik doldurun ve müşterilerinize bakım zamanı geldiğinde hatırlatma yapın.',
         features: ['Akıllı Randevu', 'Bakım Hatırlatıcı', 'No-Show Önleme']
     },
     {
-        icon: '💇‍♀️', label: 'Kuaför', // Icon override if needed
+        icon: 'sparkles', label: 'Kuaför',
         title: 'Stil Danışmanınız Yapay Zeka',
         desc: 'Müşterinizin saç yapısına ve geçmiş tercihlerine göre en uygun bakım ürünlerini ve modelleri önerin.',
         features: ['Stil Önerisi', 'Ürün Satışı', 'Müşteri Takip']
     },
     {
-        icon: '💆‍♀️', label: 'Spa',
+        icon: 'flower-2', label: 'Spa',
         title: 'Rahatlatıcı ve Kişisel Deneyim',
         desc: 'Misafirlerinizin stres seviyesine ve tercihlerine göre en uygun terapi paketlerini otomatik oluşturun.',
         features: ['Paket Önerisi', 'Terapi Takibi', 'Doluluk Analizi']
     },
     {
-        icon: '🏋️‍♂️', label: 'Spor Salonu',
+        icon: 'dumbbell', label: 'Spor Salonu',
         title: 'Üye Bağlılığını Zirveye Taşıyın',
         desc: 'Antrenmanlarını aksatan üyeleri tespit edin ve onları motive edecek kişisel mesajlar gönderin.',
         features: ['Üye Takibi', 'Risk Analizi', 'Motivasyon AI']
     },
     {
-        icon: '🏥', label: 'Klinik',
+        icon: 'stethoscope', label: 'Klinik',
         title: 'Hasta Süreçlerinde Kusursuz Akış',
         desc: 'Randevu çakışmalarını önleyin, hasta takibini dijitalleştirin ve bekleme sürelerini minimize edin.',
         features: ['Randevu Optim.', 'Hasta Takibi', 'Süreç Analizi']
     },
     {
-        icon: '🦷', label: 'Diş',
+        icon: 'smile', label: 'Diş',
         title: 'Gülüş Tasarımında Teknoloji',
         desc: 'Tedavi süreçlerini görselleştirin ve hastalarınıza tedavi sonrası simülasyonları sunun.',
         features: ['Tedavi Simülasyonu', 'Randevu Takip', 'Hasta CRM']
@@ -181,12 +181,17 @@ export function initSectorSpotlight() {
 
             if (featuresEl) {
                 featuresEl.innerHTML = sector.features.map(f => `
-                    <span class="feature-tag">✨ ${f}</span>
+                    <span class="feature-tag"><i data-lucide="sparkles" style="width: 14px; height: 14px; display: inline; vertical-align: middle;"></i> ${f}</span>
                 `).join('') + `
                 <span class="feature-tag" style="background: #f8fafc; color: #64748b; border-color: #cbd5e1; border-style: dashed;">
-                    🚀 ...ve Sınırsız Senaryo
+                    <i data-lucide="rocket" style="width: 14px; height: 14px; display: inline; vertical-align: middle;"></i> ...ve Sınırsız Senaryo
                 </span>
                 `;
+                
+                // Re-initialize Lucide icons for new content
+                if (typeof lucide !== 'undefined') {
+                    lucide.createIcons();
+                }
             }
         };
 

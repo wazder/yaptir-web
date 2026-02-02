@@ -25,9 +25,9 @@ let gridCols = 0; // Store column count for neighbor finding
 let gridRows = 0; // Store row count for exclusion zone logic
 let xRayState = {
     active: false,
-    nextTrigger: Date.now() + 2000,
+    nextTrigger: Infinity, // DISABLED - X-ray moved to approach section
     duration: 1000, // 1 second duration
-    interval: 8000, // Frequent checks
+    interval: Infinity, // Never trigger on hero
     ghosts: []
 };
 let visualMode = 'DOTS'; // 'DOTS' or 'LINES'
@@ -43,7 +43,8 @@ let resources = []; // Resource popups (Mario effect)
 let explosions = []; // Particle effects
 let robotMode = 'HERO'; // 'HERO' or 'SECTORS'
 
-const TRAIL_ICONS = ['⏰', '💰', '🤖', '🧠', '❤️', '✨'];
+// Trail particles - colorful dots instead of emojis
+const TRAIL_COLORS = ['#FF6B35', '#F7C948', '#22C55E', '#3B82F6', '#A855F7', '#EC4899'];
 
 // ─────────────────────────────────────────────────────────────────────
 // Dot Class
@@ -258,7 +259,7 @@ class WorkflowPath {
 }
 
 // ─────────────────────────────────────────────────────────────────────
-// Resource Popup Class (Mario "Coin Block" Effect)
+// Resource Popup Class (Mario "Coin Block" Effect) - Now uses particles
 // ─────────────────────────────────────────────────────────────────────
 class ResourcePopup {
     constructor(x, y) {
@@ -266,8 +267,9 @@ class ResourcePopup {
         this.y = y;
         this.yStart = y;
         this.life = 1.0;
-        this.icon = ['⏳', '💰', '🤖', '⚡️'][Math.floor(Math.random() * 4)];
-        this.bg = this.icon === '💰' ? '#ffd700' : (this.icon === '⏳' ? '#60a5fa' : '#a78bfa');
+        // Colors instead of emojis
+        const colors = ['#F7C948', '#3B82F6', '#A855F7', '#22C55E'];
+        this.color = colors[Math.floor(Math.random() * colors.length)];
     }
 
     update() {
@@ -278,18 +280,20 @@ class ResourcePopup {
     draw() {
         ctx.globalAlpha = this.life;
 
-        // Background Glow Bubble
-        ctx.shadowColor = this.bg;
+        // Draw glowing particle
+        ctx.shadowColor = this.color;
         ctx.shadowBlur = 15;
-        ctx.fillStyle = '#fff';
+        ctx.fillStyle = this.color;
 
-        ctx.font = "20px Arial";
-        ctx.textAlign = "center";
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, 8, 0, Math.PI * 2);
+        ctx.fill();
 
-        // Tiny jump logic - parabolic
-        // Removed for simpler straight up float
-
-        ctx.fillText(this.icon, this.x, this.y);
+        // Inner white glow
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, 4, 0, Math.PI * 2);
+        ctx.fill();
 
         ctx.shadowBlur = 0;
         ctx.globalAlpha = 1;
@@ -301,23 +305,23 @@ class ResourcePopup {
 // Flow Icon Class (Sectors Mode)
 // ─────────────────────────────────────────────────────────────────────
 // ─────────────────────────────────────────────────────────────────────
-// Flow Icon Class (Sectors Mode)
+// Flow Icon Class (Sectors Mode) - Now uses colored shapes
 // ─────────────────────────────────────────────────────────────────────
-const SECTOR_ICONS = [
-    { icon: '🍕', label: 'Restoran' },
-    { icon: '☕', label: 'Kafe' },
-    { icon: '🍸', label: 'Bar & Pub' },
-    { icon: '🏨', label: 'Otel' },
-    { icon: '🛒', label: 'E-Ticaret' },
-    { icon: '💈', label: 'Güzellik' },
-    { icon: '🏋️', label: 'Spor' },
-    { icon: '🏥', label: 'Sağlık' },
-    { icon: '📚', label: 'Eğitim' },
-    { icon: '🏢', label: 'Emlak' },
-    { icon: '🚗', label: 'Oto' },
-    { icon: '🎨', label: 'Sanat' },
-    { icon: '⚖️', label: 'Hukuk' },
-    { icon: '🏦', label: 'Finans' }
+const SECTOR_DATA = [
+    { color: '#FF6B35', label: 'Restoran' },
+    { color: '#8B5A2B', label: 'Kafe' },
+    { color: '#A855F7', label: 'Bar & Pub' },
+    { color: '#3B82F6', label: 'Otel' },
+    { color: '#22C55E', label: 'E-Ticaret' },
+    { color: '#EC4899', label: 'Güzellik' },
+    { color: '#F97316', label: 'Spor' },
+    { color: '#EF4444', label: 'Sağlık' },
+    { color: '#6366F1', label: 'Eğitim' },
+    { color: '#10B981', label: 'Emlak' },
+    { color: '#64748B', label: 'Oto' },
+    { color: '#F59E0B', label: 'Sanat' },
+    { color: '#1E293B', label: 'Hukuk' },
+    { color: '#0EA5E9', label: 'Finans' }
 ];
 
 class FlowIcon {
@@ -326,8 +330,8 @@ class FlowIcon {
         this.y = rowY;
         this.speed = 2 + Math.random() * 2;
 
-        const data = SECTOR_ICONS[Math.floor(Math.random() * SECTOR_ICONS.length)];
-        this.icon = data.icon;
+        const data = SECTOR_DATA[Math.floor(Math.random() * SECTOR_DATA.length)];
+        this.color = data.color;
         this.label = data.label; // Store label
 
         this.size = 20 + Math.random() * 10;
@@ -345,10 +349,20 @@ class FlowIcon {
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
 
-        // Draw Icon
-        ctx.font = `${this.size}px Arial`;
-        ctx.fillStyle = '#1e293b'; // Slate-800
-        ctx.fillText(this.icon, this.x, this.y);
+        // Draw colored circle particle
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size / 2, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.shadowColor = this.color;
+        ctx.shadowBlur = 10;
+        ctx.fill();
+        
+        // Inner glow
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size / 4, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+        ctx.fill();
+        ctx.shadowBlur = 0;
 
         // Draw Label (New)
         ctx.font = `600 12px "Plus Jakarta Sans", sans-serif`;
@@ -436,10 +450,10 @@ class GridSprite {
         this.color = '#FF6B35'; // Brand Orange
         this.scale = 2.2; // Current scale (was 1.4)
         this.targetScale = 2.2; // Target scale (was 1.4)
-        this.trail = []; // Icon trail
+        this.trail = []; // Particle trail
 
-        // Pick a random icon for next drop
-        this.nextIcon = TRAIL_ICONS[Math.floor(Math.random() * TRAIL_ICONS.length)];
+        // Pick a random color for next drop
+        this.nextColor = TRAIL_COLORS[Math.floor(Math.random() * TRAIL_COLORS.length)];
 
         // Fainted Logic
         this.isFainted = false;
@@ -527,17 +541,17 @@ class GridSprite {
     }
 
     addToTrail() {
-        // Drop an icon at current position
+        // Drop a colored particle at current position
         this.trail.push({
             x: this.x,
             y: this.y,
-            icon: this.nextIcon,
+            color: this.nextColor,
             life: 2.0, // Seconds before explosion
             maxLife: 2.0
         });
 
-        // Pick new icon for next step
-        this.nextIcon = TRAIL_ICONS[Math.floor(Math.random() * TRAIL_ICONS.length)];
+        // Pick new color for next step
+        this.nextColor = TRAIL_COLORS[Math.floor(Math.random() * TRAIL_COLORS.length)];
     }
 
     addToHistory(r, c) {
@@ -782,12 +796,13 @@ class GridSprite {
                 const distToMouse = Math.sqrt(Math.pow(this.x - mouse.x, 2) + Math.pow(this.y - mouse.y, 2));
                 if (distToMouse < 250) { // Increased range for friendliness
                     this.isHappy = true;
-                    // Occasional Heart Emission
+                    // Occasional Particle Emission
                     if (Math.random() < 0.08) {
+                        const happyColors = ['#EC4899', '#F7C948', '#A855F7'];
                         this.trail.push({
                             x: this.x + (Math.random() - 0.5) * 20,
                             y: this.y - 15,
-                            icon: Math.random() > 0.5 ? '❤️' : '✨',
+                            color: happyColors[Math.floor(Math.random() * happyColors.length)],
                             life: 1.5,
                             maxLife: 1.5
                         });
@@ -875,7 +890,7 @@ class GridSprite {
     }
 
     draw() {
-        // ─── DRAW ICON TRAIL ───
+        // ─── DRAW PARTICLE TRAIL ───
         this.trail.forEach(item => {
             const lifeRatio = item.life / item.maxLife;
 
@@ -889,16 +904,22 @@ class GridSprite {
             let scale = 1;
             if (item.life < 0.5) {
                 scale = 1 + Math.sin(Date.now() * 0.02) * 0.2; // Rapid pulse
-                ctx.shadowColor = '#FF6B35';
-                ctx.shadowBlur = 10;
             }
 
-            ctx.scale(scale, scale);
+            // Draw glowing circle particle
+            const radius = 6 * scale;
+            ctx.beginPath();
+            ctx.arc(0, 0, radius, 0, Math.PI * 2);
+            ctx.fillStyle = item.color;
+            ctx.shadowColor = item.color;
+            ctx.shadowBlur = 12;
+            ctx.fill();
 
-            ctx.font = "20px Arial";
-            ctx.textAlign = "center";
-            ctx.textBaseline = "middle";
-            ctx.fillText(item.icon, 0, 0);
+            // Inner glow
+            ctx.beginPath();
+            ctx.arc(0, 0, radius * 0.5, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
+            ctx.fill();
 
             ctx.restore();
         });

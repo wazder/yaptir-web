@@ -8,15 +8,21 @@ import { initScrollAnimations, initMarqueeParallax, initCanvasModeObserver } fro
 import { initThemeSwitcher } from './core/themeSwitcher.js';
 import { initFullPageScroll } from './core/fullPageScroll.js';
 import { initSectorSpotlight } from './modules/sectorSpotlight.js';
-import { initEmojiRain } from './modules/emojiRain.js';
+// import { initEmojiRain } from './modules/emojiRain.js'; // Disabled - replaced with icons
 import { initGalaxyCanvas } from './modules/aiChatCanvas.js';
 import { initGalaxyChat } from './modules/aiChat.js';
+import { initApproachXray } from './modules/approachXray.js';
 
 // ─────────────────────────────────────────────────────────────────────
 // DOM Ready
 // ─────────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
     console.log('🚀 Okeep AI Studio - Initializing...');
+
+    // Initialize Lucide Icons
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
 
     // Initialize all modules
     initHeroCanvas();
@@ -26,11 +32,19 @@ document.addEventListener('DOMContentLoaded', () => {
     initThemeSwitcher();
     initFullPageScroll();
     initSectorSpotlight();
-    initEmojiRain();
+    // initEmojiRain(); // Disabled - replaced with icons
     initGalaxyCanvas();
     initGalaxyChat();
+    initApproachXray();
     initHeader();
     initContactForm();
+
+    // Re-initialize Lucide icons after dynamic content loads
+    setTimeout(() => {
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+    }, 500);
 
     console.log('✨ All modules initialized!');
 });
@@ -96,13 +110,29 @@ function initContactForm() {
 }
 
 // ─────────────────────────────────────────────────────────────────────
-// Smooth Scroll for Anchor Links
+// Smooth Scroll for Anchor Links (Synced with Full Page Scroll)
 // ─────────────────────────────────────────────────────────────────────
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
+        const targetId = this.getAttribute('href');
+        const target = document.querySelector(targetId);
         if (target) {
+            // Find the section index for full-page scroll sync
+            const sections = document.querySelectorAll('.scroll-section');
+            let targetIndex = -1;
+            sections.forEach((section, index) => {
+                if (section === target || section.contains(target) || `#${section.id}` === targetId) {
+                    targetIndex = index;
+                }
+            });
+
+            // If found, dispatch section change event
+            if (targetIndex >= 0) {
+                const event = new CustomEvent('navigateToSection', { detail: { index: targetIndex } });
+                window.dispatchEvent(event);
+            }
+
             target.scrollIntoView({
                 behavior: 'smooth',
                 block: 'start'

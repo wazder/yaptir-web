@@ -117,8 +117,17 @@
     border-radius: 0;
     box-shadow: none;
     background: none;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     animation: none;
+    color: #a855f7;
+}
+
+.welcome-card .card-icon svg {
+    width: 28px;
+    height: 28px;
+    stroke-width: 1.5;
 }
 
 .welcome-card p {
