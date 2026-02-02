@@ -141,6 +141,12 @@ export function initGalaxyCanvas() {
     const isMobile = window.innerWidth <= 768 || ('ontouchstart' in window && window.innerWidth <= 1024);
     if (isMobile) {
         console.log('📱 Galaxy canvas disabled on mobile');
+        // Hide the canvas element completely
+        const canvasEl = document.getElementById('galaxy-canvas');
+        if (canvasEl) {
+            canvasEl.style.display = 'none';
+            canvasEl.style.visibility = 'hidden';
+        }
         return;
     }
     
@@ -156,17 +162,20 @@ export function initGalaxyCanvas() {
 
     setCanvasSize();
 
-    // Mouse Events scoped to canvas
-    canvas.addEventListener('mousemove', (e) => {
-        const pos = getMousePos(e);
-        mouse.x = pos.x;
-        mouse.y = pos.y;
-        mouse.active = true;
-    });
+    // Mouse Events scoped to the entire section to allow interaction through text
+    const section = document.getElementById('galaxy-chat-section');
+    if (section) {
+        section.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            mouse.x = e.clientX - rect.left;
+            mouse.y = e.clientY - rect.top;
+            mouse.active = true;
+        });
 
-    canvas.addEventListener('mouseleave', () => {
-        mouse.active = false;
-    });
+        section.addEventListener('mouseleave', () => {
+            mouse.active = false;
+        });
+    }
 
     animate();
 }

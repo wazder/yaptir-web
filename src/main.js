@@ -103,7 +103,7 @@ function initContactForm() {
         formData.append('access_key', 'YOUR_WEB3FORMS_KEY'); // User needs to replace this
         formData.append('to_email', 'destek@okeep.ai');
         formData.append('from_name', 'Okeep Website');
-        formData.append('subject', `Yeni İletişim Formu: ${formData.get('name')} - ${formData.get('sector') || 'Genel'}`);
+        formData.append('subject', `Yeni İletişim Formu: ${formData.get('name')}`);
         
         // Build email body
         const emailBody = `
@@ -111,7 +111,6 @@ Yeni bir iletişim formu gönderildi:
 
 📧 İsim: ${formData.get('name')}
 📬 E-posta: ${formData.get('email')}
-🏢 Sektör: ${formData.get('sector') || 'Belirtilmedi'}
 💬 Mesaj: ${formData.get('message') || 'Mesaj yok'}
 
 ---
@@ -148,10 +147,9 @@ Bu mesaj okeep.ai web sitesi üzerinden gönderilmiştir.
             // Fallback: Open mailto link
             const name = formData.get('name');
             const email = formData.get('email');
-            const sector = formData.get('sector') || 'Belirtilmedi';
             const message = formData.get('message') || '';
             
-            const mailtoBody = `İsim: ${name}%0D%0AE-posta: ${email}%0D%0ASektör: ${sector}%0D%0A%0D%0AMesaj:%0D%0A${encodeURIComponent(message)}`;
+            const mailtoBody = `İsim: ${name}%0D%0AE-posta: ${email}%0D%0A%0D%0AMesaj:%0D%0A${encodeURIComponent(message)}`;
             const mailtoLink = `mailto:destek@okeep.ai?subject=Okeep İletişim Formu - ${encodeURIComponent(name)}&body=${mailtoBody}`;
             
             window.location.href = mailtoLink;

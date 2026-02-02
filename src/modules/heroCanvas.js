@@ -43,12 +43,14 @@ let resources = []; // Resource popups (Mario effect)
 let explosions = []; // Particle effects
 let robotMode = 'HERO'; // 'HERO' or 'SECTORS'
 
-// Mobile detection - hide robot on mobile
+// Mobile detection - disable complex effects on mobile
 let isMobile = false;
 function checkMobile() {
     isMobile = window.innerWidth <= 768 || ('ontouchstart' in window && window.innerWidth <= 1024);
     return isMobile;
 }
+
+// Mobile: Only draw horizontal lines, disable all fancy effects
 
 // Trail particles - colorful dots instead of emojis
 const TRAIL_COLORS = ['#FF6B35', '#F7C948', '#22C55E', '#3B82F6', '#A855F7', '#EC4899'];
@@ -1434,6 +1436,13 @@ export function initHeroCanvas() {
         lastTime = timestamp;
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // MOBILE: Only draw horizontal lines, skip everything else
+        if (isMobile) {
+            drawHorizontalLines();
+            animationId = requestAnimationFrame(animate);
+            return;
+        }
 
         // ─── X-RAY LOGIC ───
         const now = Date.now();
