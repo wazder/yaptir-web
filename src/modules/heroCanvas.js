@@ -1336,6 +1336,10 @@ function handleResize() {
 // ─────────────────────────────────────────────────────────────────────
 export function initHeroCanvas() {
     console.log('🔵 initHeroCanvas() called');
+    
+    // Check mobile status first
+    checkMobile();
+    console.log('📱 Mobile status:', isMobile);
 
     canvas = document.getElementById('hero-canvas');
     console.log('🔵 Canvas element:', canvas);
@@ -1395,29 +1399,31 @@ export function initHeroCanvas() {
         flowWaves.push(new FlowWave(x, y));  // Flow connection effect
     });
 
-    // Touch support
-    heroSection.addEventListener('touchmove', (e) => {
-        e.preventDefault();
-        const rect = canvas.getBoundingClientRect();
-        const touch = e.touches[0];
-        mouse.x = touch.clientX - rect.left;
-        mouse.y = touch.clientY - rect.top;
-        mouse.active = true;
-    }, { passive: false });
+    // Touch support - ONLY on desktop, disabled on mobile to allow native scrolling
+    if (!isMobile) {
+        heroSection.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            const rect = canvas.getBoundingClientRect();
+            const touch = e.touches[0];
+            mouse.x = touch.clientX - rect.left;
+            mouse.y = touch.clientY - rect.top;
+            mouse.active = true;
+        }, { passive: false });
 
-    heroSection.addEventListener('touchstart', (e) => {
-        const rect = canvas.getBoundingClientRect();
-        const touch = e.touches[0];
-        mouse.x = touch.clientX - rect.left;
-        mouse.y = touch.clientY - rect.top;
-        mouse.active = true;
-        ripples.push(new Ripple(mouse.x, mouse.y));
-        flowWaves.push(new FlowWave(mouse.x, mouse.y));  // Flow connection effect
-    });
+        heroSection.addEventListener('touchstart', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const touch = e.touches[0];
+            mouse.x = touch.clientX - rect.left;
+            mouse.y = touch.clientY - rect.top;
+            mouse.active = true;
+            ripples.push(new Ripple(mouse.x, mouse.y));
+            flowWaves.push(new FlowWave(mouse.x, mouse.y));  // Flow connection effect
+        });
 
-    heroSection.addEventListener('touchend', () => {
-        mouse.active = false;
-    });
+        heroSection.addEventListener('touchend', () => {
+            mouse.active = false;
+        });
+    }
 
     // ─────────────────────────────────────────────────────────────────────
     // Animation Loop
