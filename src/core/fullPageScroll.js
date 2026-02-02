@@ -56,6 +56,11 @@ export function initFullPageScroll() {
         
         // Remove any touch-action restrictions
         document.body.style.touchAction = 'pan-y';
+        document.documentElement.style.touchAction = 'pan-y';
+        
+        // Prevent overscroll/bounce issues
+        document.body.style.overscrollBehavior = 'contain';
+        document.documentElement.style.overscrollBehavior = 'contain';
         
         // Also ensure sections are scrollable
         sections.forEach(section => {
@@ -63,6 +68,7 @@ export function initFullPageScroll() {
             section.style.minHeight = '100dvh';
             section.style.overflow = 'visible';
             section.style.touchAction = 'pan-y';
+            section.style.position = 'relative';
         });
         
         // Still create scroll indicator for visual feedback
@@ -270,12 +276,24 @@ function createMobileScrollIndicator(sections) {
     ).join('');
     document.body.appendChild(indicator);
 
-    // Click handlers for dots - smooth scroll to section
+    // Click handlers for dots - smooth scroll to section with immediate visual feedback
     indicator.querySelectorAll('.scroll-dot').forEach(dot => {
-        dot.addEventListener('click', () => {
+        const handleTap = (e) => {
+            e.preventDefault();
+            e.stopPropagation();
             const index = parseInt(dot.dataset.index);
+            
+            // Immediate visual feedback
+            document.querySelectorAll('.scroll-dot').forEach((d, i) => {
+                d.classList.toggle('active', i === index);
+            });
+            
+            // Scroll to section
             sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
+        };
+        
+        dot.addEventListener('click', handleTap);
+        dot.addEventListener('touchend', handleTap, { passive: false });
     });
 
     // Update active dot on scroll
