@@ -39,9 +39,31 @@ export function initFullPageScroll() {
     // MOBILE: Use native scrolling for better UX
     if (isMobileDevice()) {
         console.log('📱 Mobile detected - using native scroll');
+        
+        // Force enable scrolling on mobile with multiple approaches
         document.documentElement.style.overflow = 'auto';
+        document.documentElement.style.overflowY = 'auto';
+        document.documentElement.style.overflowX = 'hidden';
+        document.documentElement.style.height = 'auto';
+        
         document.body.style.overflow = 'auto';
+        document.body.style.overflowY = 'auto';
+        document.body.style.overflowX = 'hidden';
+        document.body.style.height = 'auto';
+        document.body.style.position = 'relative';
+        
         document.documentElement.style.scrollBehavior = 'smooth';
+        
+        // Remove any touch-action restrictions
+        document.body.style.touchAction = 'pan-y';
+        
+        // Also ensure sections are scrollable
+        sections.forEach(section => {
+            section.style.height = 'auto';
+            section.style.minHeight = '100dvh';
+            section.style.overflow = 'visible';
+            section.style.touchAction = 'pan-y';
+        });
         
         // Still create scroll indicator for visual feedback
         createMobileScrollIndicator(sections);
