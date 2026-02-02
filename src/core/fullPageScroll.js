@@ -240,7 +240,16 @@ export function initFullPageScroll() {
     window.addEventListener('keydown', (e) => {
         if (isScrolling) return;
 
-        if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
+        // Don't hijack space key when user is typing in an input or textarea
+        const activeElement = document.activeElement;
+        const isTyping = activeElement && (
+            activeElement.tagName === 'INPUT' ||
+            activeElement.tagName === 'TEXTAREA' ||
+            activeElement.isContentEditable
+        );
+
+        if (e.key === 'ArrowDown' || e.key === 'PageDown' || (e.key === ' ' && !isTyping)) {
+            if (e.key === ' ') e.preventDefault(); // Prevent default only for space scroll
             if (currentSectionIndex < sections.length - 1) {
                 currentSectionIndex++;
                 scrollToSection(currentSectionIndex);
