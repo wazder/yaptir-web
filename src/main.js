@@ -80,32 +80,86 @@ function initHeader() {
 }
 
 // ─────────────────────────────────────────────────────────────────────
-// Contact Form
+// Contact Form - Sends email via Web3Forms API
 // ─────────────────────────────────────────────────────────────────────
 function initContactForm() {
     const form = document.getElementById('contact-form');
     if (!form) return;
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
+
+        const btn = form.querySelector('button[type="submit"]');
+        const originalText = btn.innerHTML;
+        
+        // Show loading state
+        btn.innerHTML = '<span style="display: inline-flex; align-items: center; gap: 8px;">Gönderiliyor... <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83" stroke-linecap="round"/></svg></span>';
+        btn.disabled = true;
 
         // Get form data
         const formData = new FormData(form);
-        const data = Object.fromEntries(formData.entries());
+        
+        // Add Web3Forms access key and recipient
+        formData.append('access_key', 'YOUR_WEB3FORMS_KEY'); // User needs to replace this
+        formData.append('to_email', 'destek@okeep.ai');
+        formData.append('from_name', 'Okeep Website');
+        formData.append('subject', `Yeni İletişim Formu: ${formData.get('name')} - ${formData.get('sector') || 'Genel'}`);
+        
+        // Build email body
+        const emailBody = `
+Yeni bir iletişim formu gönderildi:
 
-        console.log('📧 Form submitted:', data);
+📧 İsim: ${formData.get('name')}
+📬 E-posta: ${formData.get('email')}
+🏢 Sektör: ${formData.get('sector') || 'Belirtilmedi'}
+💬 Mesaj: ${formData.get('message') || 'Mesaj yok'}
 
-        // Show success feedback
-        const btn = form.querySelector('button[type="submit"]');
-        const originalText = btn.innerHTML;
-        btn.innerHTML = '✓ Gönderildi!';
-        btn.style.background = 'linear-gradient(135deg, #10B981, #34D399)';
+---
+Bu mesaj okeep.ai web sitesi üzerinden gönderilmiştir.
+        `.trim();
+        
+        formData.append('message', emailBody);
 
-        setTimeout(() => {
+        try {
+            const response = await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                // Success
+                btn.innerHTML = '<span style="display: inline-flex; align-items: center; gap: 8px;">✓ Gönderildi!</span>';
+                btn.style.background = 'linear-gradient(135deg, #10B981, #34D399)';
+                form.reset();
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.style.background = '';
+                    btn.disabled = false;
+                }, 3000);
+            } else {
+                throw new Error(result.message || 'Gönderim başarısız');
+            }
+        } catch (error) {
+            console.error('Form error:', error);
+            
+            // Fallback: Open mailto link
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const sector = formData.get('sector') || 'Belirtilmedi';
+            const message = formData.get('message') || '';
+            
+            const mailtoBody = `İsim: ${name}%0D%0AE-posta: ${email}%0D%0ASektör: ${sector}%0D%0A%0D%0AMesaj:%0D%0A${encodeURIComponent(message)}`;
+            const mailtoLink = `mailto:destek@okeep.ai?subject=Okeep İletişim Formu - ${encodeURIComponent(name)}&body=${mailtoBody}`;
+            
+            window.location.href = mailtoLink;
+            
             btn.innerHTML = originalText;
             btn.style.background = '';
-            form.reset();
-        }, 3000);
+            btn.disabled = false;
+        }
     });
 }
 

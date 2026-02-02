@@ -137,6 +137,13 @@ class ShootingStar {
 }
 
 export function initGalaxyCanvas() {
+    // Skip canvas initialization on mobile for better performance
+    const isMobile = window.innerWidth <= 768 || ('ontouchstart' in window && window.innerWidth <= 1024);
+    if (isMobile) {
+        console.log('📱 Galaxy canvas disabled on mobile');
+        return;
+    }
+    
     canvas = document.getElementById('galaxy-canvas');
     if (!canvas) return;
     ctx = canvas.getContext('2d');

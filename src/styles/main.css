@@ -1887,7 +1887,7 @@ ol {
   flex-direction: column;
   gap: var(--space-8);
   padding-bottom: var(--space-8);
-  border-bottom: 1px solid var(--color-gray-800);
+  border-bottom: none;
   margin-bottom: var(--space-8);
 }
 
@@ -4291,21 +4291,36 @@ ol {
     min-height: 100dvh;
     height: auto !important;
     padding: 80px 16px 60px 16px !important;
+    overflow: visible !important;
+    touch-action: pan-y;
+  }
+  
+  /* Hide galaxy canvas on mobile */
+  #galaxy-canvas {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
   }
   
   .galaxy-content-wrapper {
     height: auto !important;
     min-height: auto !important;
+    position: relative;
+    z-index: 10;
   }
   
   .galaxy-chat-container {
     height: auto !important;
     min-height: auto !important;
     max-height: none !important;
+    position: relative;
+    z-index: 10;
   }
   
   .galaxy-welcome {
     padding: 20px 10px !important;
+    position: relative;
+    z-index: 10;
   }
   
   .welcome-title {
@@ -4328,10 +4343,27 @@ ol {
   
   .galaxy-input-area {
     padding: 10px !important;
+    position: relative;
+    z-index: 100;
+    touch-action: manipulation;
   }
   
   .galaxy-input {
-    font-size: 1rem !important;
+    font-size: 16px !important; /* Prevents iOS zoom on focus */
+    -webkit-appearance: none;
+    appearance: none;
+    touch-action: manipulation;
+  }
+  
+  .galaxy-submit {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .galaxy-controls {
+    position: relative;
+    z-index: 100;
+    touch-action: manipulation;
   }
   
   /* ─────────────────────────────────────────────────────────────────────
