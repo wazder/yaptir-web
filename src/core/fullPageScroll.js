@@ -23,12 +23,30 @@ if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
 }
 
+// Check if device is mobile
+function isMobileDevice() {
+    return window.innerWidth <= 768 || 
+           ('ontouchstart' in window && window.innerWidth <= 1024);
+}
+
 export function initFullPageScroll() {
     console.log('📜 Premium Full Page Scroll Initialized');
 
     const sections = document.querySelectorAll('.scroll-section');
     console.log('📜 Found sections:', sections.length);
     if (sections.length === 0) return;
+
+    // MOBILE: Use native scrolling for better UX
+    if (isMobileDevice()) {
+        console.log('📱 Mobile detected - using native scroll');
+        document.documentElement.style.overflow = 'auto';
+        document.body.style.overflow = 'auto';
+        document.documentElement.style.scrollBehavior = 'smooth';
+        
+        // Still create scroll indicator for visual feedback
+        createMobileScrollIndicator(sections);
+        return; // Exit early - let native mobile scroll handle everything
+    }
 
     let currentSectionIndex = 0;
     let isScrolling = false;
@@ -217,5 +235,82 @@ export function initFullPageScroll() {
             scrollToSection(currentSectionIndex);
         }
     });
+}
+
+// ─────────────────────────────────────────────────────────────────────
+// Mobile Scroll Indicator (passive tracking)
+// ─────────────────────────────────────────────────────────────────────
+function createMobileScrollIndicator(sections) {
+    const indicator = document.createElement('div');
+    indicator.className = 'scroll-indicator';
+    indicator.innerHTML = Array.from(sections).map((section, i) => 
+        `<button class="scroll-dot" data-index="${i}" aria-label="Go to section ${i + 1}"></button>`
+    ).join('');
+    document.body.appendChild(indicator);
+
+    // Click handlers for dots - smooth scroll to section
+    indicator.querySelectorAll('.scroll-dot').forEach(dot => {
+        dot.addEventListener('click', () => {
+            const index = parseInt(dot.dataset.index);
+            sections[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
+
+    // Update active dot on scroll
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                updateMobileScrollIndicator(sections);
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }, { passive: true });
+
+    // Initial update
+    updateMobileScrollIndicator(sections);
+}
+
+function updateMobileScrollIndicator(sections) {
+    const scrollPos = window.scrollY + window.innerHeight * 0.3;
+    let currentIndex = 0;
+
+    sections.forEach((section, i) => {
+        if (section.offsetTop <= scrollPos) {
+            currentIndex = i;
+        }
+    });
+
+    document.querySelectorAll('.scroll-dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentIndex);
+    });
+    
+    // Also update background color for mobile
+    updateMobileBackgroundColor(currentIndex);
+}
+
+// Space theme colors for mobile
+const MOBILE_SPACE_COLORS = [
+    { r: 30, g: 30, b: 63 },
+    { r: 22, g: 22, b: 43 },
+    { r: 15, g: 15, b: 35 },
+    { r: 10, g: 10, b: 26 },
+    { r: 8, g: 8, b: 20 },
+    { r: 5, g: 5, b: 16 },
+];
+
+function updateMobileBackgroundColor(index) {
+    const color = MOBILE_SPACE_COLORS[Math.min(index, MOBILE_SPACE_COLORS.length - 1)];
+    const bgColor = `rgb(${color.r}, ${color.g}, ${color.b})`;
+    
+    document.body.style.transition = 'background-color 0.4s ease';
+    document.body.style.backgroundColor = bgColor;
+    
+    const canvasBg = document.getElementById('global-canvas-bg');
+    if (canvasBg) {
+        canvasBg.style.transition = 'background-color 0.4s ease';
+        canvasBg.style.backgroundColor = bgColor;
+    }
 }
 

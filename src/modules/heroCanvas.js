@@ -43,6 +43,13 @@ let resources = []; // Resource popups (Mario effect)
 let explosions = []; // Particle effects
 let robotMode = 'HERO'; // 'HERO' or 'SECTORS'
 
+// Mobile detection - hide robot on mobile
+let isMobile = false;
+function checkMobile() {
+    isMobile = window.innerWidth <= 768 || ('ontouchstart' in window && window.innerWidth <= 1024);
+    return isMobile;
+}
+
 // Trail particles - colorful dots instead of emojis
 const TRAIL_COLORS = ['#FF6B35', '#F7C948', '#22C55E', '#3B82F6', '#A855F7', '#EC4899'];
 
@@ -1314,10 +1321,14 @@ function handleResize() {
     createDots();
     // Initial DOM Track
 
-
-    // Re-init sprite on resize
-    sprite = new GridSprite();
-    sprite.updateExclusionZone(); // Update exclusions
+    // Re-init sprite on resize - ONLY ON DESKTOP
+    checkMobile();
+    if (!isMobile) {
+        sprite = new GridSprite();
+        sprite.updateExclusionZone(); // Update exclusions
+    } else {
+        sprite = null; // Explicitly clear sprite on mobile
+    }
 }
 
 // ─────────────────────────────────────────────────────────────────────
@@ -1595,8 +1606,8 @@ export function initHeroCanvas() {
                 dot.update(deltaTime);
                 dot.draw();
             });
-            // Robot only active in DOTS mode
-            if (sprite) {
+            // Robot only active in DOTS mode AND on desktop
+            if (sprite && !isMobile) {
                 sprite.update();
                 sprite.draw();
             }
