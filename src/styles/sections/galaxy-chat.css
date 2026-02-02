@@ -39,6 +39,17 @@
     display: flex;
     flex-direction: column;
     flex: 1;
+    pointer-events: none; /* Allow background interaction */
+}
+
+/* Re-enable pointer events for interactive elements */
+.galaxy-welcome,
+.galaxy-controls,
+.galaxy-history,
+.galaxy-input-area,
+.galaxy-suggestions,
+.welcome-card {
+    pointer-events: auto;
 }
 
 .galaxy-chat-container {
