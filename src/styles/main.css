@@ -1182,6 +1182,11 @@ ol {
   max-width: 900px;
 }
 
+/* Hide mobile logo on desktop */
+.hero__mobile-logo {
+  display: none;
+}
+
 .hero__title {
   font-size: var(--text-4xl);
   font-weight: 800;
@@ -4202,6 +4207,22 @@ ol {
     align-items: center;
     justify-content: center;
     touch-action: pan-y;
+  }
+  
+  /* Hide header on mobile - logo is in hero now */
+  .header {
+    display: none !important;
+  }
+  
+  /* Mobile Hero Logo - Big centered logo */
+  .hero__mobile-logo {
+    display: block;
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--color-white);
+    text-align: center;
+    margin-bottom: 2rem;
   }
   
   .hero__content {
