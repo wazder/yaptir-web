@@ -35,6 +35,7 @@ let flowIcons = []; // Icons flowing on lines
 let mouse = { x: -1000, y: -1000, active: false };
 let animationId;
 let lastTime = 0;
+let isInitialized = false; // Prevent multiple initializations
 let ripples = [];
 let flowWaves = [];  // Click flow effect
 let sprite; // The Tiny Architect
@@ -492,6 +493,17 @@ class GridSprite {
         const rect = heroContent.getBoundingClientRect();
         const canvasRect = canvas.getBoundingClientRect();
 
+        // Validate that we got meaningful values (DOM must be rendered)
+        if (rect.height === 0 || rect.width === 0 || canvasRect.height === 0) {
+            console.log('⚠️ DOM not ready, using fallback exclusion zone');
+            // Use sensible defaults based on typical content position
+            this.exclusionZone.minCol = Math.floor(gridCols * 0.2);
+            this.exclusionZone.maxCol = Math.floor(gridCols * 0.8);
+            this.exclusionZone.minRow = Math.floor(gridRows * 0.2);
+            this.exclusionZone.maxRow = Math.floor(gridRows * 0.6);
+            return;
+        }
+
         // Convert DOM rect to canvas coordinates
         const x1 = rect.left - canvasRect.left;
         const y1 = rect.top - canvasRect.top;
@@ -521,22 +533,43 @@ class GridSprite {
     init() {
         this.updateExclusionZone(); // Ensure zone is calculated first
 
+        // Validate grid dimensions exist
+        if (gridRows <= 0 || gridCols <= 0) {
+            console.log('⚠️ Grid not ready, deferring sprite init');
+            return;
+        }
+
         // Start below the exclusion zone (buttons)
-        if (this.exclusionZone.maxRow > 0 && this.exclusionZone.maxRow < gridRows - 2) {
+        // Ensure exclusionZone has valid values
+        const hasValidExclusion = this.exclusionZone.maxRow > 0 && 
+                                  this.exclusionZone.maxRow < gridRows - 2 &&
+                                  this.exclusionZone.maxRow > this.exclusionZone.minRow;
+        
+        if (hasValidExclusion) {
             // Start centered below the content
-            this.row = this.exclusionZone.maxRow + 1;
+            this.row = Math.min(this.exclusionZone.maxRow + 1, gridRows - 1);
             this.col = Math.floor(gridCols / 2);
         } else {
-            // Fallback: Start in lower half
-            this.row = Math.floor(gridRows * 0.75);
+            // Fallback: Start in lower half (70% down the screen)
+            this.row = Math.floor(gridRows * 0.70);
             this.col = Math.floor(gridCols * 0.5);
         }
+
+        // Clamp values to valid range
+        this.row = Math.max(0, Math.min(this.row, gridRows - 1));
+        this.col = Math.max(0, Math.min(this.col, gridCols - 1));
 
         const startDot = this.getDot(this.row, this.col);
         if (startDot) {
             this.x = startDot.x;
             this.y = startDot.y;
+        } else {
+            // Absolute fallback: bottom center of canvas
+            this.x = canvas.width / 2;
+            this.y = canvas.height * 0.7;
         }
+
+        console.log('🤖 Sprite initialized at row:', this.row, 'col:', this.col, 'x:', this.x, 'y:', this.y);
 
         // Add initial position to trail
         this.addToTrail();
@@ -915,16 +948,21 @@ class GridSprite {
                 scale = 1 + Math.sin(Date.now() * 0.02) * 0.2; // Rapid pulse
             }
 
-            // Draw glowing circle particle
+            // Draw glowing circle particle (without shadowBlur to avoid rectangular artifacts)
             const radius = 6 * scale;
+            
+            // Create radial gradient for glow effect instead of shadowBlur
+            const gradient = ctx.createRadialGradient(0, 0, 0, 0, 0, radius * 2);
+            gradient.addColorStop(0, item.color);
+            gradient.addColorStop(0.5, item.color);
+            gradient.addColorStop(1, 'transparent');
+            
             ctx.beginPath();
-            ctx.arc(0, 0, radius, 0, Math.PI * 2);
-            ctx.fillStyle = item.color;
-            ctx.shadowColor = item.color;
-            ctx.shadowBlur = 12;
+            ctx.arc(0, 0, radius * 2, 0, Math.PI * 2);
+            ctx.fillStyle = gradient;
             ctx.fill();
 
-            // Inner glow
+            // Inner bright core
             ctx.beginPath();
             ctx.arc(0, 0, radius * 0.5, 0, Math.PI * 2);
             ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
@@ -1339,6 +1377,13 @@ function handleResize() {
 export function initHeroCanvas() {
     console.log('🔵 initHeroCanvas() called');
     
+    // Prevent multiple initializations (which cause speed multiplication)
+    if (isInitialized) {
+        console.log('⚠️ HeroCanvas already initialized, calling handleResize instead');
+        handleResize();
+        return;
+    }
+    
     // Check mobile status first
     checkMobile();
     console.log('📱 Mobile status:', isMobile);
@@ -1354,8 +1399,51 @@ export function initHeroCanvas() {
     ctx = canvas.getContext('2d');
     console.log('🔵 Canvas context:', ctx);
 
-    // Set canvas size
-    handleResize();
+    // MOBILE: Simplified initialization - only horizontal lines
+    if (isMobile) {
+        console.log('📱 Mobile mode - simplified canvas with horizontal lines only');
+        
+        // Simple resize handler for mobile
+        const mobileResize = () => {
+            const heroSection = document.querySelector('.hero');
+            if (heroSection) {
+                canvas.width = heroSection.offsetWidth;
+                canvas.height = heroSection.offsetHeight;
+            }
+        };
+        
+        mobileResize();
+        window.addEventListener('resize', mobileResize);
+        
+        // Simple animation loop for mobile - just horizontal lines
+        function mobileAnimate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawHorizontalLines();
+            animationId = requestAnimationFrame(mobileAnimate);
+        }
+        
+        mobileAnimate();
+        isInitialized = true;
+        console.log('📱 Mobile hero canvas initialized (horizontal lines only)');
+        return; // Exit early - no fancy effects on mobile
+    }
+
+    // DESKTOP: Full initialization with all effects
+    // Delay initial setup to ensure DOM is fully rendered
+    // This fixes the robot starting position issue on page load
+    requestAnimationFrame(() => {
+        setTimeout(() => {
+            // Set canvas size
+            handleResize();
+            
+            // Re-initialize sprite with correct positions after DOM is ready
+            if (!isMobile && sprite) {
+                sprite.updateExclusionZone();
+                sprite.init();
+            }
+        }, 100);
+    });
+    
     window.addEventListener('resize', handleResize);
 
     // Mouse tracking
@@ -1671,17 +1759,8 @@ export function initHeroCanvas() {
     }
 
     animate(0);
+    isInitialized = true; // Mark as initialized
     console.log('🎨 Interactive dot grid initialized');
-
-    // Debounced Resize Observer
-    let resizeTimeout;
-    window.addEventListener('resize', () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-            initHeroCanvas();
-
-        }, 300);
-    });
 }
 
 

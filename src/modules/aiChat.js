@@ -4,8 +4,9 @@
    Powered by Groq API (Llama 3.1)
 ═══════════════════════════════════════════════════════════════════════ */
 
-// ⚠️ API KEY'İNİ BURAYA EKLE
-const GROQ_API_KEY = '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';
+// ⚠️ GÜVENLİK: API Key environment variable'dan alınmalı
+// .env dosyasına VITE_GROQ_API_KEY=your_key_here ekleyin
+const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY || '';
 
 const SYSTEM_PROMPT = `Sen Okeep'in yapay zeka asistanısın. Okeep, HER SEKTÖRDEN işletmelere yapay zeka destekli otomasyon ve verimlilik çözümleri sunan bir teknoloji şirketidir. Hangi sektör olursa olsun, işletmelere özel çözümler üretiyoruz!
 

@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Kalam:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+/* Fonts are now loaded in index.html for better performance */
 @import "./sectors-grid.css";
 @import "./sections/app-demo.css";
 
@@ -644,6 +643,55 @@
   --z-mega-menu: 90;
   --z-modal: 200;
   --z-tooltip: 150;
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   ACCESSIBILITY UTILITIES
+───────────────────────────────────────────────────────────────────── */
+
+/* Visually hidden but accessible to screen readers */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Skip navigation link */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-orange);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: var(--radius-md);
+  z-index: 9999;
+  font-weight: 600;
+  text-decoration: none;
+  transition: top 0.3s ease;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* ─────────────────────────────────────────────────────────────────────
@@ -1770,12 +1818,14 @@ ol {
    CONTACT SECTION
 ───────────────────────────────────────────────────────────────────── */
 .contact {
-  padding: var(--space-16) 0 var(--space-8);
+  padding: var(--space-12) 0 0;
   height: auto;
   min-height: 100vh;
-  justify-content: space-between;
+  justify-content: flex-start;
   /* Background handled by dynamic body color */
   background: transparent;
+  display: flex;
+  flex-direction: column;
 }
 
 .contact-content {
@@ -1783,6 +1833,7 @@ ol {
   grid-template-columns: 1fr;
   gap: var(--space-16);
   /* Increased gap for less cramped feel */
+  margin-top: var(--space-16);
 }
 
 @media (min-width: 768px) {
@@ -1790,6 +1841,7 @@ ol {
     grid-template-columns: 1fr 1fr;
     align-items: start;
     gap: var(--space-12);
+    margin-top: var(--space-20);
   }
 }
 
@@ -1889,7 +1941,7 @@ ol {
   /* Background handled by dynamic body color */
   background: transparent;
   color: var(--color-white);
-  padding: var(--space-8) 0;
+  padding: var(--space-6) 0 var(--space-4);
   margin-top: auto;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
@@ -1897,10 +1949,10 @@ ol {
 .footer__content {
   display: flex;
   flex-direction: column;
-  gap: var(--space-8);
-  padding-bottom: var(--space-8);
+  gap: var(--space-4);
+  padding-bottom: var(--space-4);
   border-bottom: none;
-  margin-bottom: var(--space-8);
+  margin-bottom: var(--space-4);
 }
 
 @media (min-width: 768px) {
@@ -4519,10 +4571,30 @@ ol {
   @keyframes float { 0%, 100% { transform: none; } }
   @keyframes floatIcon { 0%, 100% { transform: none; } }
   
-  /* Hide canvas elements on mobile - only background color */
-  #hero-canvas,
-  #approach-xray-canvas {
-    opacity: 0.3 !important;
+  /* ─────────────────────────────────────────────────────────────────────
+     MOBILE CANVAS HANDLING
+     Hero canvas shows only horizontal lines (controlled by JS)
+     Other canvases are hidden completely for performance
+  ───────────────────────────────────────────────────────────────────── */
+  #hero-canvas {
+    opacity: 0.5 !important;
+    pointer-events: none !important;
+  }
+  
+  #approach-xray-canvas,
+  #galaxy-canvas {
+    display: none !important;
+    visibility: hidden !important;
+  }
+  
+  /* Ensure smooth native scrolling on mobile */
+  * {
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Fix any position:fixed elements that might block scrolling */
+  .scroll-indicator {
+    display: none !important;
   }
 }
 
