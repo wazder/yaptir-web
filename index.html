@@ -70,6 +70,21 @@
                      (navigator.maxTouchPoints > 0);
       if (isMobile) {
         document.documentElement.classList.add('is-touch-device');
+        // FORCE enable scrolling via inline styles (highest priority)
+        document.documentElement.style.cssText = 'overflow:auto!important;overflow-y:auto!important;height:auto!important;touch-action:pan-y!important;-webkit-overflow-scrolling:touch!important;';
+        // Also apply to body when DOM is ready
+        if (document.body) {
+          document.body.style.cssText = 'overflow:auto!important;overflow-y:auto!important;height:auto!important;touch-action:pan-y!important;-webkit-overflow-scrolling:touch!important;position:relative!important;';
+        } else {
+          document.addEventListener('DOMContentLoaded', function() {
+            document.body.style.cssText = 'overflow:auto!important;overflow-y:auto!important;height:auto!important;touch-action:pan-y!important;-webkit-overflow-scrolling:touch!important;position:relative!important;';
+            // Also ensure scroll sections are properly styled
+            var sections = document.querySelectorAll('.scroll-section');
+            for (var i = 0; i < sections.length; i++) {
+              sections[i].style.cssText = 'height:auto!important;min-height:100vh!important;max-height:none!important;overflow:visible!important;touch-action:pan-y!important;';
+            }
+          });
+        }
       } else {
         document.documentElement.classList.add('is-desktop');
       }
