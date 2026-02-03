@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="tr" style="scroll-behavior: auto;">
 
 <head>
   <meta charset="UTF-8">
@@ -7,22 +7,80 @@
   <meta name="description" content="Okeep - İşletmenizin Beyni Bizimle Daha Hızlı! Terzi dikimi AI çözümleri.">
   <title>Okeep | AI Studio</title>
 
-  <!-- Fonts -->
+  <!-- SEO Meta Tags -->
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Okeep">
+  <meta name="keywords" content="AI, yapay zeka, otomasyon, işletme çözümleri, restoran, e-ticaret, CRM">
+  <link rel="canonical" href="https://okeep.co">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://okeep.co">
+  <meta property="og:title" content="Okeep | AI Studio - İşletmenizin Beyni">
+  <meta property="og:description" content="İşletmenizin Beyni Bizimle Daha Hızlı! Terzi dikimi AI çözümleri.">
+  <meta property="og:image" content="https://okeep.co/og-image.jpg">
+  <meta property="og:locale" content="tr_TR">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://okeep.co">
+  <meta name="twitter:title" content="Okeep | AI Studio - İşletmenizin Beyni">
+  <meta name="twitter:description" content="İşletmenizin Beyni Bizimle Daha Hızlı! Terzi dikimi AI çözümleri.">
+  <meta name="twitter:image" content="https://okeep.co/og-image.jpg">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Okeep",
+    "url": "https://okeep.co",
+    "logo": "https://okeep.co/logo.png",
+    "description": "İşletmelere yapay zeka destekli otomasyon ve verimlilik çözümleri sunan teknoloji şirketi",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Cihangir, Oba Sk. No: 2 D:B",
+      "addressLocality": "Beyoğlu",
+      "addressRegion": "İstanbul",
+      "postalCode": "34433",
+      "addressCountry": "TR"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+90-551-554-22-09",
+      "contactType": "customer service",
+      "email": "destek@okeep.co"
+    }
+  }
+  </script>
+
+  <!-- Prevent scroll restoration by browser -->
+  <script>
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+  </script>
+
+  <!-- Fonts (consolidated) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@500;600&family=Kalam:wght@400;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@500;600&family=Kalam:wght@400;700&family=Patrick+Hand&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
     rel="stylesheet">
 
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-  <script type="module" crossorigin src="/assets/index-33PRB6N2.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-B-9j3knP.css">
+  <script type="module" crossorigin src="/assets/index-DQwVMAL4.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-CaOh8LGw.css">
 </head>
 
 <body>
+  <!-- Skip Navigation Link for Accessibility -->
+  <a href="#hero" class="skip-link">Ana içeriğe geç</a>
+
   <!-- FIXED GLOBAL BACKGROUND -->
-  <div id="global-canvas-bg">
+  <div id="global-canvas-bg" aria-hidden="true">
     <canvas id="hero-canvas"></canvas>
   </div>
 
@@ -67,10 +125,10 @@
       </p>
 
       <div class="hero__actions">
-        <a href="#iletisim" class="btn btn--primary btn-tailor">
+        <a href="#iletisim" class="btn btn--primary">
           Demo Al
         </a>
-        <a href="#hizmetler" class="btn btn--ghost btn-tailor">
+        <a href="#hizmetler" class="btn btn--ghost">
           Çözümleri Keşfet
         </a>
       </div>
@@ -214,7 +272,6 @@
     
     <div class="container">
       <div class="section-header">
-        <span class="section-tag">Yaklaşımımız</span>
         <h2 class="section-title">Basit, Akıllı, <span class="text-gradient">En Verimli</span></h2>
         <p class="section-subtitle">Yapay Zeka ile Güçlendirilmiş Yeni Nesil İş Gücü</p>
       </div>
@@ -392,7 +449,6 @@
   <section class="team scroll-section" id="ekip">
     <div class="container">
       <div class="section-header">
-        <span class="section-tag">Ekibimiz</span>
         <h2 class="section-title">Arkasındaki <span class="text-gradient">Beyinler</span></h2>
         <p class="section-subtitle">Tutkulu, yaratıcı ve çözüm odaklı bir ekip</p>
       </div>
@@ -420,7 +476,7 @@
           <p class="team-role">Hukuk Danışmanı</p>
           <p class="team-bio">Şirket hukuku ve sözleşme yönetimi uzmanı. Yasal süreçlerde güvenilir rehber.</p>
           <div class="team-social">
-            <a href="mailto:nazli.s.sertbas@gsghukuk.com" aria-label="Email"><i data-lucide="mail"></i></a>
+            <a href="mailto:REDACTED_EMAIL" aria-label="Email"><i data-lucide="mail"></i></a>
           </div>
         </div>
 
@@ -462,6 +518,7 @@
           <p class="team-bio">Yazılım mühendisi. Performans optimizasyonu ve temiz kod mimarisi.</p>
           <div class="team-social">
             <a href="https://www.linkedin.com/in/furkan-bora/" target="_blank" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+            <a href="https://github.com/furkanbora239" target="_blank" aria-label="GitHub"><i data-lucide="github"></i></a>
           </div>
         </div>
       </div>
@@ -475,7 +532,6 @@
     <div class="container">
       <div class="contact-content">
         <div class="contact-info">
-          <span class="section-tag">İletişim</span>
           <h2 class="section-title">Haydi, <span class="text-gradient">Tanışalım!</span></h2>
           <p class="contact-desc">
             İşletmenizi bir üst seviyeye taşımaya hazır mısınız?
@@ -504,20 +560,23 @@
                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="currentColor" stroke-width="2" />
                 <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2" />
               </svg>
-              Muus Coffee, Cihangir, İstanbul, Türkiye
+              Cihangir, Oba Sk. No: 2 D:B, 34433 Beyoğlu/İstanbul
             </span>
           </div>
         </div>
 
-        <form class="contact-form" id="contact-form">
+        <form class="contact-form" id="contact-form" aria-label="İletişim formu">
           <div class="form-group">
-            <input type="text" id="name" name="name" placeholder="Adınız" required>
+            <label for="contact-name" class="visually-hidden">Adınız</label>
+            <input type="text" id="contact-name" name="name" placeholder="Adınız" required aria-required="true">
           </div>
           <div class="form-group">
-            <input type="email" id="email" name="email" placeholder="E-posta Adresiniz" required>
+            <label for="contact-email" class="visually-hidden">E-posta Adresiniz</label>
+            <input type="email" id="contact-email" name="email" placeholder="E-posta Adresiniz" required aria-required="true">
           </div>
           <div class="form-group">
-            <textarea id="message" name="message" placeholder="Mesajınız" rows="4"></textarea>
+            <label for="contact-message" class="visually-hidden">Mesajınız</label>
+            <textarea id="contact-message" name="message" placeholder="Mesajınız" rows="4"></textarea>
           </div>
           <button type="submit" class="btn btn--primary btn--full">
             Gönder
@@ -547,7 +606,7 @@
         </div>
         <div class="footer__bottom">
           <p>&copy; 2026 Okeep. Tüm hakları saklıdır.</p>
-          <p class="footer__made">Made with <i data-lucide="heart" style="width: 14px; height: 14px; display: inline; vertical-align: middle; color: #ec4899;"></i> in Istanbul</p>
+          <p class="footer__made">Made with <i data-lucide="heart" style="width: 14px; height: 14px; display: inline-flex; vertical-align: -0.125em; color: #ec4899;"></i> in Istanbul</p>
         </div>
       </div>
     </footer>
