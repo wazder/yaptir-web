@@ -40,6 +40,18 @@ class Dot {
 }
 
 function initCanvas() {
+    // Skip canvas initialization on mobile for better performance
+    const isMobile = window.innerWidth <= 768 || ('ontouchstart' in window && window.innerWidth <= 1024);
+    if (isMobile) {
+        console.log('📱 Approach X-ray canvas disabled on mobile');
+        const canvasEl = document.getElementById('approach-xray-canvas');
+        if (canvasEl) {
+            canvasEl.style.display = 'none';
+            canvasEl.style.visibility = 'hidden';
+        }
+        return;
+    }
+    
     canvas = document.getElementById('approach-xray-canvas');
     if (!canvas) return;
     

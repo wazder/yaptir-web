@@ -167,13 +167,32 @@ export function initFullPageScroll() {
     document.body.style.overflow = 'hidden';
     document.documentElement.style.scrollBehavior = 'auto';
 
-    // Force scroll to top on page load
-    window.scrollTo(0, 0);
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
+    // Force scroll to top on page load - multiple attempts to ensure it works
+    function forceScrollToTop() {
+        window.scrollTo(0, 0);
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+        
+        // Also ensure first section is visible
+        if (sections[0]) {
+            sections[0].scrollIntoView({ behavior: 'auto', block: 'start' });
+        }
+    }
 
-    // Initialize position
-    scrollToSection(0, 'auto');
+    // Immediate scroll reset
+    forceScrollToTop();
+    
+    // Additional resets to handle race conditions
+    requestAnimationFrame(() => {
+        forceScrollToTop();
+        updateBackgroundColor(0);
+    });
+    
+    // Final reset after a short delay to ensure DOM is fully ready
+    setTimeout(() => {
+        forceScrollToTop();
+        updateBackgroundColor(0);
+    }, 50);
 
     // Create scroll indicator
     createScrollIndicator(sections);

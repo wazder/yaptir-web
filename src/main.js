@@ -58,110 +58,65 @@ document.addEventListener('DOMContentLoaded', () => {
 // ─────────────────────────────────────────────────────────────────────
 function initHeader() {
     const header = document.getElementById('header');
-    let lastScrollY = 0;
+    if (!header) return;
 
+    // Header only visible on first section (hero)
+    // Listen to custom sectionChanged event from fullPageScroll
+    window.addEventListener('sectionChanged', (e) => {
+        const { index } = e.detail;
+        
+        if (index === 0) {
+            // Show header on hero section
+            header.style.transform = 'translateY(0)';
+            header.style.opacity = '1';
+            header.style.pointerEvents = 'auto';
+        } else {
+            // Hide header on all other sections
+            header.style.transform = 'translateY(-100%)';
+            header.style.opacity = '0';
+            header.style.pointerEvents = 'none';
+        }
+    });
+
+    // Also listen to native scroll for mobile/fallback
     window.addEventListener('scroll', () => {
         const currentScrollY = window.scrollY;
-
-        // Add shadow when scrolled
-        if (currentScrollY > 10) {
-            header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.08)';
-        } else {
-            header.style.boxShadow = 'none';
-        }
-
-        // Hide/show on scroll direction
+        
         if (currentScrollY > 100) {
-            if (currentScrollY > lastScrollY) {
-                header.style.transform = 'translateY(-100%)';
-            } else {
-                header.style.transform = 'translateY(0)';
-            }
+            header.style.transform = 'translateY(-100%)';
+            header.style.opacity = '0';
+            header.style.pointerEvents = 'none';
+        } else {
+            header.style.transform = 'translateY(0)';
+            header.style.opacity = '1';
+            header.style.pointerEvents = 'auto';
         }
-
-        lastScrollY = currentScrollY;
     }, { passive: true });
 }
 
 // ─────────────────────────────────────────────────────────────────────
-// Contact Form - Sends email via Web3Forms API
+// Contact Form - Opens user's email client with mailto:
 // ─────────────────────────────────────────────────────────────────────
 function initContactForm() {
     const form = document.getElementById('contact-form');
     if (!form) return;
 
-    form.addEventListener('submit', async (e) => {
+    form.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        const btn = form.querySelector('button[type="submit"]');
-        const originalText = btn.innerHTML;
+        // Get form data (updated IDs for accessibility)
+        const name = form.querySelector('#contact-name').value;
+        const email = form.querySelector('#contact-email').value;
+        const message = form.querySelector('#contact-message').value || '';
+
+        // Build mailto link
+        const subject = `Okeep İletişim Formu - ${name}`;
+        const body = `İsim: ${name}\nE-posta: ${email}\n\nMesaj:\n${message}`;
         
-        // Show loading state
-        btn.innerHTML = '<span style="display: inline-flex; align-items: center; gap: 8px;">Gönderiliyor... <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83" stroke-linecap="round"/></svg></span>';
-        btn.disabled = true;
-
-        // Get form data
-        const formData = new FormData(form);
+        const mailtoLink = `mailto:destek@okeep.co?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
         
-        // Add Web3Forms access key and recipient
-        formData.append('access_key', 'YOUR_WEB3FORMS_KEY'); // User needs to replace this
-        formData.append('to_email', 'destek@okeep.ai');
-        formData.append('from_name', 'Okeep Website');
-        formData.append('subject', `Yeni İletişim Formu: ${formData.get('name')}`);
-        
-        // Build email body
-        const emailBody = `
-Yeni bir iletişim formu gönderildi:
-
-📧 İsim: ${formData.get('name')}
-📬 E-posta: ${formData.get('email')}
-💬 Mesaj: ${formData.get('message') || 'Mesaj yok'}
-
----
-Bu mesaj okeep.ai web sitesi üzerinden gönderilmiştir.
-        `.trim();
-        
-        formData.append('message', emailBody);
-
-        try {
-            const response = await fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                body: formData
-            });
-
-            const result = await response.json();
-
-            if (result.success) {
-                // Success
-                btn.innerHTML = '<span style="display: inline-flex; align-items: center; gap: 8px;">✓ Gönderildi!</span>';
-                btn.style.background = 'linear-gradient(135deg, #10B981, #34D399)';
-                form.reset();
-                
-                setTimeout(() => {
-                    btn.innerHTML = originalText;
-                    btn.style.background = '';
-                    btn.disabled = false;
-                }, 3000);
-            } else {
-                throw new Error(result.message || 'Gönderim başarısız');
-            }
-        } catch (error) {
-            console.error('Form error:', error);
-            
-            // Fallback: Open mailto link
-            const name = formData.get('name');
-            const email = formData.get('email');
-            const message = formData.get('message') || '';
-            
-            const mailtoBody = `İsim: ${name}%0D%0AE-posta: ${email}%0D%0A%0D%0AMesaj:%0D%0A${encodeURIComponent(message)}`;
-            const mailtoLink = `mailto:destek@okeep.ai?subject=Okeep İletişim Formu - ${encodeURIComponent(name)}&body=${mailtoBody}`;
-            
-            window.location.href = mailtoLink;
-            
-            btn.innerHTML = originalText;
-            btn.style.background = '';
-            btn.disabled = false;
-        }
+        // Open user's email client
+        window.location.href = mailtoLink;
     });
 }
 
