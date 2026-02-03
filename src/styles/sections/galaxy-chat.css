@@ -308,6 +308,7 @@
         padding: 80px 1rem 20px;
         overflow: visible !important;
         touch-action: pan-y;
+        background-color: transparent !important; /* Match body background */
     }
     
     /* Hide galaxy canvas on mobile for better performance and UX */
