@@ -47,7 +47,15 @@ let robotMode = 'HERO'; // 'HERO' or 'SECTORS'
 // Mobile detection - disable complex effects on mobile
 let isMobile = false;
 function checkMobile() {
-    isMobile = window.innerWidth <= 768 || ('ontouchstart' in window && window.innerWidth <= 1024);
+    // Check for touch device using multiple methods (same as HTML inline script)
+    const isTouchDevice = ('ontouchstart' in window) || 
+                          (navigator.maxTouchPoints > 0) ||
+                          /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    // Also check if HTML has the is-touch-device class (set by inline script)
+    const hasClass = document.documentElement.classList.contains('is-touch-device');
+    
+    isMobile = isTouchDevice || hasClass || window.innerWidth <= 768;
     return isMobile;
 }
 
