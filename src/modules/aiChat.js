@@ -110,10 +110,15 @@ export function initGalaxyChat() {
             const response = await callGroqAPI(text);
             typingDiv.textContent = response;
             typingDiv.classList.remove('typing');
+            // Scroll to bottom after AI response
+            setTimeout(() => {
+                historyContainer.scrollTop = historyContainer.scrollHeight;
+            }, 100);
         } catch (error) {
             console.error('Groq API Error:', error);
             typingDiv.textContent = 'Bir hata oluştu. Lütfen tekrar deneyin.';
             typingDiv.classList.remove('typing');
+            historyContainer.scrollTop = historyContainer.scrollHeight;
         }
 
         input.disabled = false;
