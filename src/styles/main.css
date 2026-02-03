@@ -4166,6 +4166,42 @@ ol {
    Fixes viewport height issues, improves fluidity, hides robot on mobile
 ═══════════════════════════════════════════════════════════════════════ */
 
+/* ─────────────────────────────────────────────────────────────────────
+   CRITICAL: Touch Device Detection (works for ALL orientations)
+   This ensures mobile devices can scroll regardless of screen width
+───────────────────────────────────────────────────────────────────── */
+@media (hover: none) and (pointer: coarse) {
+  html {
+    overflow: auto !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    height: auto !important;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y !important;
+    overscroll-behavior-y: contain;
+  }
+  
+  body {
+    overflow: auto !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    height: auto !important;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y !important;
+    position: relative;
+    overscroll-behavior-y: contain;
+  }
+  
+  .scroll-section {
+    height: auto !important;
+    min-height: 100vh;
+    min-height: 100dvh;
+    max-height: none !important;
+    overflow: visible !important;
+    touch-action: pan-y !important;
+  }
+}
+
 @media (max-width: 768px) {
   /* ─────────────────────────────────────────────────────────────────────
      CRITICAL: Fix scroll-section height for mobile
@@ -4177,6 +4213,8 @@ ol {
     overflow-y: auto !important;
     height: auto !important;
     -webkit-overflow-scrolling: touch;
+    touch-action: pan-y !important;
+    overscroll-behavior: contain;
   }
   
   body {
@@ -4185,17 +4223,19 @@ ol {
     overflow-y: auto !important;
     height: auto !important;
     -webkit-overflow-scrolling: touch;
-    touch-action: pan-y;
+    touch-action: pan-y !important;
     position: relative;
+    overscroll-behavior: contain;
   }
   
   .scroll-section {
     height: auto !important;
     min-height: 100vh;
     min-height: 100dvh; /* Dynamic viewport height for mobile browsers */
+    max-height: none !important;
     overflow: visible !important;
     padding: 80px 16px 60px 16px;
-    touch-action: pan-y;
+    touch-action: pan-y !important;
   }
   
   /* Hero Section - Mobile Optimized */
@@ -4376,7 +4416,9 @@ ol {
   #galaxy-chat-section {
     min-height: 100dvh;
     height: auto !important;
-    padding: 80px 16px 60px 16px !important;
+    max-height: none !important;
+    padding: 80px 16px 100px 16px !important; /* Increased bottom padding */
+    padding-bottom: calc(100px + env(safe-area-inset-bottom, 0px)) !important;
     overflow: visible !important;
     touch-action: pan-y;
     background-color: transparent !important; /* Use body background */
@@ -4392,6 +4434,8 @@ ol {
   .galaxy-content-wrapper {
     height: auto !important;
     min-height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
     position: relative;
     z-index: 10;
   }
@@ -4400,6 +4444,7 @@ ol {
     height: auto !important;
     min-height: auto !important;
     max-height: none !important;
+    overflow: visible !important;
     position: relative;
     z-index: 10;
   }
@@ -4408,6 +4453,8 @@ ol {
     padding: 20px 10px !important;
     position: relative;
     z-index: 10;
+    min-height: auto !important;
+    flex: none !important;
   }
   
   .welcome-title {
@@ -4451,6 +4498,23 @@ ol {
     position: relative;
     z-index: 100;
     touch-action: manipulation;
+    padding-bottom: env(safe-area-inset-bottom, 20px) !important;
+    margin-bottom: 20px;
+  }
+  
+  .galaxy-history {
+    max-height: 50vh !important;
+    min-height: 200px;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .galaxy-suggestions {
+    padding-bottom: 10px;
+  }
+  
+  .galaxy-disclaimer {
+    padding-bottom: 10px;
   }
   
   /* ─────────────────────────────────────────────────────────────────────

@@ -7,15 +7,17 @@
     position: relative;
     width: 100%;
     min-height: 100vh;
-    height: 100vh; /* Fixed height */
-    max-height: 100vh; /* Prevent growing beyond viewport */
+    min-height: 100dvh; /* Dynamic viewport height */
+    height: 100vh; /* Fixed height on desktop */
+    max-height: 100vh; /* Prevent growing beyond viewport on desktop */
     background-color: #020617;
     color: #f8fafc;
-    overflow: hidden; /* Keep section contained */
+    overflow: hidden; /* Keep section contained on desktop */
     display: flex;
     flex-direction: column;
     /* FIX: Improved alignment - ensuring it's not too high */
     padding: 100px 2rem 40px; 
+    padding-bottom: calc(40px + env(safe-area-inset-bottom, 0px)); /* Safe area support */
     box-sizing: border-box;
 }
 
@@ -80,6 +82,13 @@
     text-align: center;
     padding: 2rem 0;
     animation: fadeIn 0.8s ease-out forwards;
+    min-height: 300px; /* Ensure minimum height for consistent spacing */
+}
+
+/* When welcome is hidden, ensure proper layout */
+.galaxy-welcome[style*="display: none"] + .galaxy-history {
+    flex: 1;
+    min-height: 200px;
 }
 
 .welcome-title {
@@ -169,6 +178,10 @@
     scrollbar-width: thin;
     scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
     /* Use calc to leave space for input area (~180px) and top padding (~100px) */
+    max-height: calc(100vh - 320px);
+    flex: 1 1 auto;
+    min-height: 200px; /* Ensure minimum height when visible */
+}
     max-height: calc(100vh - 320px);
     flex: 1 1 auto;
 }
@@ -326,13 +339,43 @@
     order: 3; /* Disclaimer comes last */
 }
 
+/* ─── Touch Device Support (ALL orientations) ─── */
+@media (hover: none) and (pointer: coarse) {
+    #galaxy-chat-section {
+        padding: 80px 1rem 100px;
+        height: auto !important;
+        min-height: 100dvh;
+        max-height: none !important;
+        overflow: visible !important;
+        touch-action: pan-y !important;
+        background-color: transparent !important;
+    }
+    
+    #galaxy-canvas {
+        display: none !important;
+    }
+    
+    .galaxy-content-wrapper,
+    .galaxy-chat-container {
+        height: auto !important;
+        min-height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+    }
+    
+    .galaxy-controls {
+        padding-bottom: env(safe-area-inset-bottom, 20px);
+    }
+}
+
 /* ─── Responsiveness ─── */
 @media (max-width: 768px) {
     #galaxy-chat-section {
-        padding: 80px 1rem 20px;
-        height: 100vh;
-        max-height: 100vh;
-        overflow: hidden;
+        padding: 80px 1rem 100px; /* Increased bottom padding for safe area */
+        height: auto !important;
+        min-height: 100dvh;
+        max-height: none !important;
+        overflow: visible !important;
         touch-action: pan-y;
         background-color: transparent !important; /* Match body background */
     }
@@ -346,11 +389,18 @@
     .galaxy-content-wrapper {
         position: relative;
         z-index: 10;
+        height: auto !important;
+        min-height: auto !important;
+        overflow: visible !important;
     }
     
     .galaxy-chat-container {
         position: relative;
         z-index: 10;
+        height: auto !important;
+        min-height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
     }
 
     .welcome-grid {
@@ -366,11 +416,13 @@
         padding: 1.25rem;
     }
     
-    /* Fix input area for mobile */
+    /* Fix input area for mobile - ensure it's always visible */
     .galaxy-controls {
         position: relative;
         z-index: 100;
         touch-action: manipulation;
+        padding-bottom: env(safe-area-inset-bottom, 20px); /* Safe area for notch devices */
+        margin-bottom: 20px;
     }
     
     .galaxy-input-area {
@@ -389,6 +441,23 @@
     .galaxy-submit {
         touch-action: manipulation;
         -webkit-tap-highlight-color: transparent;
+    }
+    
+    /* Fix chat history for mobile */
+    .galaxy-history {
+        max-height: 50vh !important;
+        min-height: 200px;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Fix suggestions chips for mobile */
+    .galaxy-suggestions {
+        padding-bottom: 10px;
+    }
+    
+    .galaxy-disclaimer {
+        padding-bottom: 10px;
     }
 }
 

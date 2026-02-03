@@ -23,10 +23,19 @@ if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
 }
 
-// Check if device is mobile
+// Check if device is mobile/touch - works for ALL orientations
 function isMobileDevice() {
-    return window.innerWidth <= 768 || 
-           ('ontouchstart' in window && window.innerWidth <= 1024);
+    // Check for touch capability (most reliable for mobile detection)
+    const hasTouch = 'ontouchstart' in window || 
+                     navigator.maxTouchPoints > 0 || 
+                     window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+    
+    // User agent check as fallback
+    const isMobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    // Return true if it's a touch device OR mobile user agent
+    // Don't check width - touch devices should always use native scroll
+    return hasTouch || isMobileUA;
 }
 
 export function initFullPageScroll() {
@@ -41,26 +50,27 @@ export function initFullPageScroll() {
         console.log('📱 Mobile detected - using native scroll');
         
         // Force enable scrolling on mobile with multiple approaches
-        document.documentElement.style.overflow = 'auto';
-        document.documentElement.style.overflowY = 'auto';
-        document.documentElement.style.overflowX = 'hidden';
-        document.documentElement.style.height = 'auto';
+        document.documentElement.style.cssText = `
+            overflow: auto !important;
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
+            height: auto !important;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            touch-action: pan-y;
+            overscroll-behavior: contain;
+        `;
         
-        document.body.style.overflow = 'auto';
-        document.body.style.overflowY = 'auto';
-        document.body.style.overflowX = 'hidden';
-        document.body.style.height = 'auto';
-        document.body.style.position = 'relative';
-        
-        document.documentElement.style.scrollBehavior = 'smooth';
-        
-        // Remove any touch-action restrictions
-        document.body.style.touchAction = 'pan-y';
-        document.documentElement.style.touchAction = 'pan-y';
-        
-        // Prevent overscroll/bounce issues
-        document.body.style.overscrollBehavior = 'contain';
-        document.documentElement.style.overscrollBehavior = 'contain';
+        document.body.style.cssText = `
+            overflow: auto !important;
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
+            height: auto !important;
+            position: relative;
+            -webkit-overflow-scrolling: touch;
+            touch-action: pan-y;
+            overscroll-behavior: contain;
+        `;
         
         // Also ensure sections are scrollable
         sections.forEach(section => {
