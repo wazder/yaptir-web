@@ -45,43 +45,15 @@ export function initFullPageScroll() {
     console.log('📜 Found sections:', sections.length);
     if (sections.length === 0) return;
 
+    // Check if mobile (class already added by inline script in HTML)
+    const isMobile = document.documentElement.classList.contains('is-touch-device');
+
     // MOBILE: Use native scrolling for better UX
-    if (isMobileDevice()) {
-        console.log('📱 Mobile detected - using native scroll');
+    if (isMobile) {
+        console.log('📱 Touch device detected - native scroll active');
         
-        // Force enable scrolling on mobile with multiple approaches
-        document.documentElement.style.cssText = `
-            overflow: auto !important;
-            overflow-y: auto !important;
-            overflow-x: hidden !important;
-            height: auto !important;
-            scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
-            touch-action: pan-y;
-            overscroll-behavior: contain;
-        `;
-        
-        document.body.style.cssText = `
-            overflow: auto !important;
-            overflow-y: auto !important;
-            overflow-x: hidden !important;
-            height: auto !important;
-            position: relative;
-            -webkit-overflow-scrolling: touch;
-            touch-action: pan-y;
-            overscroll-behavior: contain;
-        `;
-        
-        // Also ensure sections are scrollable
-        sections.forEach(section => {
-            section.style.height = 'auto';
-            section.style.minHeight = '100dvh';
-            section.style.overflow = 'visible';
-            section.style.touchAction = 'pan-y';
-            section.style.position = 'relative';
-        });
-        
-        // Still create scroll indicator for visual feedback
+        // Just create scroll indicator for visual feedback
+        // CSS already handles the scroll enabling via .is-touch-device class
         createMobileScrollIndicator(sections);
         return; // Exit early - let native mobile scroll handle everything
     }

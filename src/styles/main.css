@@ -708,10 +708,23 @@
 
 html {
   height: 100vh;
-  overflow: hidden;
-  /* JS takes over */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Desktop: JS controls scroll */
+html.is-desktop {
+  overflow: hidden;
+}
+
+/* Mobile/Touch: Native scroll enabled */
+html.is-touch-device {
+  overflow: auto !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  height: auto !important;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
 }
 
 body {
@@ -722,8 +735,22 @@ body {
   /* Space theme: Start with first section color */
   background-color: rgb(30, 30, 63);
   overflow-x: hidden;
+}
+
+/* Desktop: JS controls scroll */
+html.is-desktop body {
   overflow: hidden;
-  /* JS takes over */
+}
+
+/* Mobile/Touch: Native scroll enabled */
+html.is-touch-device body {
+  overflow: auto !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  height: auto !important;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+  position: relative;
 }
 
 /* Hiding Scrollbar */
@@ -754,6 +781,16 @@ body {
   flex-direction: column;
   justify-content: center;
   width: 100%;
+}
+
+/* Mobile/Touch: Allow scrolling through sections */
+html.is-touch-device .scroll-section {
+  height: auto !important;
+  min-height: 100vh;
+  min-height: 100dvh;
+  max-height: none !important;
+  overflow: visible !important;
+  touch-action: pan-y;
 }
 
 .sectors-snap {
@@ -4170,6 +4207,32 @@ ol {
    CRITICAL: Touch Device Detection (works for ALL orientations)
    This ensures mobile devices can scroll regardless of screen width
 ───────────────────────────────────────────────────────────────────── */
+
+/* JavaScript adds .is-mobile-device class - highest priority */
+html.is-mobile-device,
+body.is-mobile-device {
+  overflow: auto !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  height: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  touch-action: pan-y !important;
+  overscroll-behavior-y: contain !important;
+}
+
+body.is-mobile-device {
+  position: relative !important;
+}
+
+.is-mobile-device .scroll-section {
+  height: auto !important;
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
+  max-height: none !important;
+  overflow: visible !important;
+  touch-action: pan-y !important;
+}
+
 @media (hover: none) and (pointer: coarse) {
   html {
     overflow: auto !important;
