@@ -4,6 +4,15 @@
 ═══════════════════════════════════════════════════════════════════════ */
 
 // ─────────────────────────────────────────────────────────────────────
+// GROQ AI API CONFIG (Same as Desktop)
+// ─────────────────────────────────────────────────────────────────────
+var GROQ_API_KEY = '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';
+
+var AI_SYSTEM_PROMPT = 'Sen Okeep\'in yapay zeka asistanısın. Okeep, HER SEKTÖRDEN işletmelere yapay zeka destekli otomasyon ve verimlilik çözümleri sunan bir teknoloji şirketidir.\n\nGörevin:\n- Ziyaretçilere Okeep\'in hizmetleri hakkında bilgi vermek\n- HER sektöre özel çözümler önermek\n- Demo talep etmeleri için yönlendirmek\n\nTemel Çözümlerimiz:\n📊 Veri Analizi & Raporlama\n📈 Otomasyon\n🎯 Müşteri Yönetimi (CRM)\n📅 Randevu & Rezervasyon\n💰 Maliyet Optimizasyonu\n🤖 AI Asistan\n\nKurallar:\n- Kısa ve öz yanıtlar ver (2-3 cümle)\n- Samimi ve yardımsever ol\n- Türkçe konuş\n- Hiçbir sektörü reddetme\n- Demo için iletişim formunu yönlendir';
+
+var aiConversationHistory = [];
+
+// ─────────────────────────────────────────────────────────────────────
 // DEVICE DETECTION - Redirect to desktop if screen is large
 // ─────────────────────────────────────────────────────────────────────
 (function () {
@@ -412,5 +421,184 @@ document.addEventListener('DOMContentLoaded', function () {
 
          lastScroll = currentScroll;
       }, { passive: true });
+   }
+
+   // ─────────────────────────────────────────────────────────────────
+   // AI CHAT FAB
+   // ─────────────────────────────────────────────────────────────────
+   const aiFab = document.getElementById('aiFab');
+   const aiFabBtn = document.getElementById('aiFabBtn');
+   const aiGreeting = document.getElementById('aiGreeting');
+   const aiGreetingClose = document.getElementById('aiGreetingClose');
+   const aiChat = document.getElementById('aiChat');
+   const aiChatClose = document.getElementById('aiChatClose');
+   const aiChatInput = document.getElementById('aiChatInput');
+   const aiChatSend = document.getElementById('aiChatSend');
+   const aiChatMessages = document.getElementById('aiChatMessages');
+
+   function openAiChat() {
+      aiChat.classList.add('active');
+      aiFab.classList.add('active');
+      aiGreeting.classList.remove('active');
+      document.body.style.overflow = 'hidden';
+   }
+
+   function closeAiChat() {
+      aiChat.classList.remove('active');
+      aiFab.classList.remove('active');
+      document.body.style.overflow = '';
+   }
+
+   if (aiFabBtn && aiChat) {
+      // Toggle chat on FAB click
+      aiFabBtn.addEventListener('click', function () {
+         if (aiChat.classList.contains('active')) {
+            closeAiChat();
+         } else {
+            openAiChat();
+         }
+      });
+
+      // Close chat button
+      if (aiChatClose) {
+         aiChatClose.addEventListener('click', closeAiChat);
+      }
+
+      // Close greeting bubble
+      if (aiGreetingClose) {
+         aiGreetingClose.addEventListener('click', function (e) {
+            e.stopPropagation();
+            aiGreeting.classList.remove('active');
+         });
+      }
+
+      // Show greeting after 2 seconds
+      setTimeout(function () {
+         if (!aiChat.classList.contains('active')) {
+            aiGreeting.classList.add('active');
+
+            // Auto-hide greeting after 5 seconds
+            setTimeout(function () {
+               aiGreeting.classList.remove('active');
+            }, 5000);
+         }
+      }, 2000);
+
+      // AI Message sending with Groq API
+      var isSending = false;
+
+      function addTypingIndicator() {
+         var typingDiv = document.createElement('div');
+         typingDiv.className = 'ai-message ai-message--bot ai-message--typing';
+         typingDiv.id = 'aiTypingIndicator';
+         typingDiv.innerHTML = '<p>...</p>';
+         aiChatMessages.appendChild(typingDiv);
+         aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+         return typingDiv;
+      }
+
+      function removeTypingIndicator() {
+         var typing = document.getElementById('aiTypingIndicator');
+         if (typing) typing.remove();
+      }
+
+      async function callGroqAPI(userMessage) {
+         aiConversationHistory.push({
+            role: 'user',
+            content: userMessage
+         });
+
+         var response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+            method: 'POST',
+            headers: {
+               'Content-Type': 'application/json',
+               'Authorization': 'Bearer ' + GROQ_API_KEY
+            },
+            body: JSON.stringify({
+               model: 'llama-3.3-70b-versatile',
+               messages: [
+                  { role: 'system', content: AI_SYSTEM_PROMPT }
+               ].concat(aiConversationHistory),
+               max_tokens: 300,
+               temperature: 0.7
+            })
+         });
+
+         if (!response.ok) {
+            throw new Error('API Error: ' + response.status);
+         }
+
+         var data = await response.json();
+         var aiMessage = data.choices[0].message.content;
+
+         aiConversationHistory.push({
+            role: 'assistant',
+            content: aiMessage
+         });
+
+         return aiMessage;
+      }
+
+      async function sendMessage() {
+         var message = aiChatInput.value.trim();
+         if (!message || isSending) return;
+
+         isSending = true;
+         aiChatInput.disabled = true;
+         aiChatSend.disabled = true;
+
+         // Add user message
+         var userMsg = document.createElement('div');
+         userMsg.className = 'ai-message ai-message--user';
+         userMsg.innerHTML = '<p>' + message + '</p>';
+         aiChatMessages.appendChild(userMsg);
+
+         // Clear input
+         aiChatInput.value = '';
+
+         // Scroll to bottom
+         aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+
+         // Show typing
+         addTypingIndicator();
+
+         try {
+            var aiResponse = await callGroqAPI(message);
+            removeTypingIndicator();
+
+            // Add AI response
+            var botMsg = document.createElement('div');
+            botMsg.className = 'ai-message ai-message--bot';
+            botMsg.innerHTML = '<p>' + aiResponse + '</p>';
+            aiChatMessages.appendChild(botMsg);
+            aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+         } catch (error) {
+            console.error('AI Chat Error:', error);
+            removeTypingIndicator();
+
+            var errorMsg = document.createElement('div');
+            errorMsg.className = 'ai-message ai-message--bot';
+            errorMsg.innerHTML = '<p>Bir hata oluştu. Lütfen tekrar deneyin. 🙏</p>';
+            aiChatMessages.appendChild(errorMsg);
+            aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+         }
+
+         isSending = false;
+         aiChatInput.disabled = false;
+         aiChatSend.disabled = false;
+         aiChatInput.focus();
+      }
+
+      if (aiChatSend) {
+         aiChatSend.addEventListener('click', sendMessage);
+      }
+
+      if (aiChatInput) {
+         aiChatInput.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') {
+               sendMessage();
+            }
+         });
+      }
    }
 });
