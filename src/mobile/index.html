@@ -667,6 +667,73 @@
         </div>
     </div>
 
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         AI CHAT BOT - FAB & Panel
+    ═══════════════════════════════════════════════════════════════════════ -->
+
+    <!-- Floating Action Button -->
+    <div class="ai-fab" id="aiFab">
+        <button type="button" class="ai-fab__btn" id="aiFabBtn" aria-label="AI Asistan">
+            <svg class="ai-fab__icon ai-fab__icon--chat" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2">
+                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+                <circle cx="9" cy="10" r="1" fill="currentColor" />
+                <circle cx="12" cy="10" r="1" fill="currentColor" />
+                <circle cx="15" cy="10" r="1" fill="currentColor" />
+            </svg>
+            <svg class="ai-fab__icon ai-fab__icon--close" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2">
+                <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
+        </button>
+
+        <!-- Greeting Bubble -->
+        <div class="ai-fab__greeting" id="aiGreeting">
+            <span>Merhaba! 👋 Size nasıl yardımcı olabilirim?</span>
+            <button type="button" class="ai-fab__greeting-close" id="aiGreetingClose" aria-label="Kapat">×</button>
+        </div>
+    </div>
+
+    <!-- Chat Panel -->
+    <div class="ai-chat" id="aiChat">
+        <div class="ai-chat__header">
+            <div class="ai-chat__avatar">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3" />
+                    <path
+                        d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                </svg>
+            </div>
+            <div class="ai-chat__info">
+                <h3 class="ai-chat__name">Okeep AI</h3>
+                <span class="ai-chat__status">Çevrimiçi</span>
+            </div>
+            <button type="button" class="ai-chat__close" id="aiChatClose" aria-label="Kapat">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="ai-chat__messages" id="aiChatMessages">
+            <div class="ai-message ai-message--bot">
+                <p>Merhaba! 👋 Ben Okeep AI asistanınızım.</p>
+            </div>
+            <div class="ai-message ai-message--bot">
+                <p>Size nasıl yardımcı olabilirim?</p>
+            </div>
+        </div>
+
+        <div class="ai-chat__input-area">
+            <input type="text" class="ai-chat__input" id="aiChatInput" placeholder="Mesajınızı yazın..." />
+            <button type="button" class="ai-chat__send" id="aiChatSend" aria-label="Gönder">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script src="./main.js"></script>
 </body>
