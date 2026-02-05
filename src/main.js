@@ -3,6 +3,28 @@
    Orchestrates all interactions and animations
 ═══════════════════════════════════════════════════════════════════════ */
 
+// ─────────────────────────────────────────────────────────────────────
+// DEVICE DETECTION - Redirect to mobile version based on screen width
+// ─────────────────────────────────────────────────────────────────────
+(function () {
+    const MOBILE_BREAKPOINT = 768; // px
+
+    function checkScreenSize() {
+        const isMobileSize = window.innerWidth <= MOBILE_BREAKPOINT;
+
+        // If screen is small and not on mobile page, redirect to mobile
+        if (isMobileSize && !window.location.pathname.includes('/mobile/')) {
+            window.location.href = '/src/mobile/index.html';
+        }
+    }
+
+    // Check on load
+    checkScreenSize();
+
+    // Check on resize
+    window.addEventListener('resize', checkScreenSize);
+})();
+
 // Import CSS
 import './styles/main.css';
 import './styles/sections/galaxy-chat.css';
@@ -18,10 +40,10 @@ import { initGalaxyChat } from './modules/aiChat.js';
 import { initApproachXray } from './modules/approachXray.js';
 
 // ─────────────────────────────────────────────────────────────────────
-// DOM Ready
+// DOM Ready (Desktop Only)
 // ─────────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('🚀 Okeep AI Studio - Initializing...');
+    console.log('🖥️ Okeep AI Studio (Desktop) - Initializing...');
 
     // Initialize Lucide Icons
     if (typeof lucide !== 'undefined') {
@@ -64,7 +86,7 @@ function initHeader() {
     // Listen to custom sectionChanged event from fullPageScroll
     window.addEventListener('sectionChanged', (e) => {
         const { index } = e.detail;
-        
+
         if (index === 0) {
             // Show header on hero section
             header.style.transform = 'translateY(0)';
@@ -81,7 +103,7 @@ function initHeader() {
     // Also listen to native scroll for mobile/fallback
     window.addEventListener('scroll', () => {
         const currentScrollY = window.scrollY;
-        
+
         if (currentScrollY > 100) {
             header.style.transform = 'translateY(-100%)';
             header.style.opacity = '0';
@@ -112,9 +134,9 @@ function initContactForm() {
         // Build mailto link
         const subject = `Okeep İletişim Formu - ${name}`;
         const body = `İsim: ${name}\nE-posta: ${email}\n\nMesaj:\n${message}`;
-        
+
         const mailtoLink = `mailto:destek@okeep.co?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        
+
         // Open user's email client
         window.location.href = mailtoLink;
     });
