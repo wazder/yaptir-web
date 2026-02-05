@@ -27,6 +27,52 @@
 })();
 
 // ─────────────────────────────────────────────────────────────────────
+// THEME MANAGEMENT - Device preference + manual toggle + localStorage
+// ─────────────────────────────────────────────────────────────────────
+(function () {
+   const THEME_KEY = 'okeep-theme';
+   const html = document.documentElement;
+
+   // Get saved preference or device preference
+   function getPreferredTheme() {
+      const savedTheme = localStorage.getItem(THEME_KEY);
+      if (savedTheme) {
+         return savedTheme;
+      }
+      // Use device preference
+      return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+   }
+
+   // Apply theme
+   function applyTheme(theme) {
+      if (theme === 'light') {
+         html.setAttribute('data-theme', 'light');
+      } else {
+         html.removeAttribute('data-theme');
+      }
+   }
+
+   // Toggle theme
+   window.toggleTheme = function () {
+      const currentTheme = html.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      applyTheme(newTheme);
+      localStorage.setItem(THEME_KEY, newTheme);
+   };
+
+   // Apply on load
+   applyTheme(getPreferredTheme());
+
+   // Listen for device preference changes
+   window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', function (e) {
+      // Only auto-switch if user hasn't manually set a preference
+      if (!localStorage.getItem(THEME_KEY)) {
+         applyTheme(e.matches ? 'light' : 'dark');
+      }
+   });
+})();
+
+// ─────────────────────────────────────────────────────────────────────
 // DOM Ready
 // ─────────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', function () {
@@ -87,12 +133,22 @@ document.addEventListener('DOMContentLoaded', function () {
    const mobileMenu = document.getElementById('mobileMenu');
    const menuLinks = document.querySelectorAll('.mobile-menu__link');
    const contactForm = document.getElementById('contactForm');
+   const themeToggle = document.getElementById('themeToggle');
 
    // Bottom Sheet elements
    const howItWorksBtn = document.getElementById('howItWorksBtn');
    const bottomSheet = document.getElementById('bottomSheet');
    const bottomSheetOverlay = document.getElementById('bottomSheetOverlay');
    const closeBottomSheetBtn = document.getElementById('closeBottomSheet');
+
+   // ─────────────────────────────────────────────────────────────────
+   // THEME TOGGLE
+   // ─────────────────────────────────────────────────────────────────
+   if (themeToggle) {
+      themeToggle.addEventListener('click', function () {
+         window.toggleTheme();
+      });
+   }
 
    // ─────────────────────────────────────────────────────────────────
    // BOTTOM SHEET
