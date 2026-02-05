@@ -163,6 +163,8 @@ document.addEventListener('DOMContentLoaded', function () {
       bottomSheet.classList.remove('active');
       bottomSheetOverlay.classList.remove('active');
       document.body.style.overflow = '';
+      // Reset any transform applied during drag
+      bottomSheet.style.transform = '';
    }
 
    if (howItWorksBtn && bottomSheet) {
@@ -182,6 +184,58 @@ document.addEventListener('DOMContentLoaded', function () {
             closeBottomSheet();
          }
       });
+
+      // ─────────────────────────────────────────────────────────────────
+      // SWIPE DOWN TO CLOSE
+      // ─────────────────────────────────────────────────────────────────
+      let touchStartY = 0;
+      let touchCurrentY = 0;
+      let isDragging = false;
+
+      bottomSheet.addEventListener('touchstart', function (e) {
+         // Only start drag if touching the handle area (top 60px)
+         const touch = e.touches[0];
+         const rect = bottomSheet.getBoundingClientRect();
+         const touchY = touch.clientY - rect.top;
+
+         if (touchY < 60) {
+            touchStartY = touch.clientY;
+            isDragging = true;
+            bottomSheet.style.transition = 'none';
+         }
+      }, { passive: true });
+
+      bottomSheet.addEventListener('touchmove', function (e) {
+         if (!isDragging) return;
+
+         touchCurrentY = e.touches[0].clientY;
+         const deltaY = touchCurrentY - touchStartY;
+
+         // Only allow dragging down (positive delta)
+         if (deltaY > 0) {
+            bottomSheet.style.transform = 'translateY(' + deltaY + 'px)';
+         }
+      }, { passive: true });
+
+      bottomSheet.addEventListener('touchend', function (e) {
+         if (!isDragging) return;
+
+         isDragging = false;
+         bottomSheet.style.transition = '';
+
+         const deltaY = touchCurrentY - touchStartY;
+
+         // If dragged down more than 100px, close the sheet
+         if (deltaY > 100) {
+            closeBottomSheet();
+         } else {
+            // Snap back
+            bottomSheet.style.transform = '';
+         }
+
+         touchStartY = 0;
+         touchCurrentY = 0;
+      }, { passive: true });
    }
 
    // ─────────────────────────────────────────────────────────────────
