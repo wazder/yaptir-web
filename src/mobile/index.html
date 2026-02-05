@@ -32,7 +32,7 @@
 
         <div class="header__actions">
             <!-- Hemen Ara Butonu -->
-            <a href="tel:+90XXXXXXXXXX" class="header__call" aria-label="Hemen Ara">
+            <a href="tel:+90XXXXXXXXXX" class="header__call" aria-label="Hemen Ara" style="display: none;">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path
                         d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
@@ -76,7 +76,7 @@
             <!-- Butonlar -->
             <div class="hero__actions">
                 <a href="#iletisim" class="btn btn--primary">Demo Al</a>
-                <a href="#nasil-calisir" class="btn btn--secondary">Nasıl Çalışır?</a>
+                <button type="button" id="howItWorksBtn" class="btn btn--secondary">Nasıl Çalışır?</button>
             </div>
         </div>
     </section>
@@ -86,40 +86,141 @@
     ═══════════════════════════════════════════════════════════════════════ -->
     <section class="sectors" id="sektorler">
         <div class="sectors__track">
+            <!-- Restoran -->
             <span class="sector-pill">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 002-2V2" />
                     <path d="M7 2v20" />
-                    <path d="M21 15V2v0a5 5 0 00-5 5v6c0 1.1.9 2 2 2h3" />
+                    <path d="M21 15V2a5 5 0 00-5 5v6c0 1.1.9 2 2 2h3" />
                 </svg>
                 Restoran
             </span>
+            <!-- Kafe -->
             <span class="sector-pill">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 8h1a4 4 0 110 8h-1" />
+                    <path d="M3 8h14v9a4 4 0 01-4 4H7a4 4 0 01-4-4V8z" />
+                    <path d="M6 2v4" />
+                    <path d="M10 2v4" />
+                    <path d="M14 2v4" />
+                </svg>
+                Kafe
+            </span>
+            <!-- E-Ticaret -->
+            <span class="sector-pill">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="9" cy="21" r="1" />
                     <circle cx="20" cy="21" r="1" />
                     <path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6" />
                 </svg>
                 E-Ticaret
             </span>
+            <!-- Otel -->
             <span class="sector-pill">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 6.5V9m6-2.5V9" />
                 </svg>
                 Otel
             </span>
+            <!-- Güzellik -->
             <span class="sector-pill">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path
-                        d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="6" cy="6" r="3" />
+                    <path d="M8.12 8.12L12 12" />
+                    <path d="M20 4L8.12 15.88" />
+                    <circle cx="6" cy="18" r="3" />
+                    <path d="M14.8 14.8L20 20" />
                 </svg>
                 Güzellik
             </span>
+            <!-- Klinik -->
             <span class="sector-pill">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
                 </svg>
                 Klinik
+            </span>
+            <!-- Mağaza -->
+            <span class="sector-pill">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                    <path d="M9 22V12h6v10" />
+                </svg>
+                Mağaza
+            </span>
+            <!-- Moda -->
+            <span class="sector-pill">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                        d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.47a1 1 0 00.99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.47a2 2 0 00-1.34-2.23z" />
+                </svg>
+                Moda
+            </span>
+            <!-- Spa -->
+            <span class="sector-pill">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                        d="M12 2a10 10 0 00-6.88 17.23c-.05.27-.12.55-.12.77a3 3 0 006 0c0-.22-.07-.5-.12-.77A10 10 0 0012 2z" />
+                    <path d="M12 2v20" />
+                </svg>
+                Spa
+            </span>
+            <!-- Kuaför -->
+            <span class="sector-pill">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9.937 15.5A2 2 0 0012 14a2 2 0 002.063 1.5l3.937 5.5-3 1-3-4.5-3 4.5-3-1z" />
+                    <path d="M12 14V4" />
+                    <path d="M8 8l4-4 4 4" />
+                </svg>
+                Kuaför
+            </span>
+            <!-- Spor Salonu -->
+            <span class="sector-pill">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M6.5 6.5L17.5 17.5M6.5 17.5L17.5 6.5" />
+                    <path d="M2 12h20" />
+                    <path d="M12 2v20" />
+                </svg>
+                Spor Salonu
+            </span>
+            <!-- Bar -->
+            <span class="sector-pill">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M8 22h8" />
+                    <path d="M12 11v11" />
+                    <path d="M5.8 3h12.4L12 11z" />
+                </svg>
+                Bar
+            </span>
+            <!-- Fast Food -->
+            <span class="sector-pill">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 11h18" />
+                    <path d="M12 3v8" />
+                    <rect x="2" y="11" width="20" height="8" rx="2" />
+                    <path d="M5 19v2" />
+                    <path d="M19 19v2" />
+                </svg>
+                Fast Food
+            </span>
+            <!-- Fırın -->
+            <span class="sector-pill">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4.6 13.11L10 18.5l5.4-5.39a4 4 0 10-5.4-5.4L10 8l-.6-.61a4 4 0 00-5.4 5.72z" />
+                    <path d="M10 18.5l4.6 4.61a4 4 0 005.4-5.72L14 11.5" />
+                </svg>
+                Fırın
+            </span>
+            <!-- Paket Servis -->
+            <span class="sector-pill">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M16.5 9.4l-9-5.19" />
+                    <path
+                        d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" />
+                    <path d="M3.27 6.96L12 12.01l8.73-5.05" />
+                    <path d="M12 22.08V12" />
+                </svg>
+                Paket Servis
             </span>
         </div>
     </section>
@@ -127,7 +228,7 @@
     <!-- ═══════════════════════════════════════════════════════════════════════
          4. AI ASISTAN MOCKUP
     ═══════════════════════════════════════════════════════════════════════ -->
-    <section class="ai-mockup" id="nasil-calisir">
+    <section class="ai-mockup" id="nasil-calisir" style="display: none;">
         <div class="ai-mockup__phone">
             <div class="phone-notch"></div>
             <div class="phone-screen">
@@ -164,55 +265,174 @@
     </section>
 
     <!-- ═══════════════════════════════════════════════════════════════════════
-         5. HİZMET KARTLARI
+         5. HİZMET KARTLARI (Marquee - İki Satır)
     ═══════════════════════════════════════════════════════════════════════ -->
     <section class="services" id="cozumler">
-        <div class="services__grid">
-            <!-- Kart 1 -->
-            <div class="service-card">
-                <div class="service-card__icon">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="3" y="3" width="18" height="18" rx="2" />
-                        <path d="M3 9h18" />
-                        <path d="M9 21V9" />
-                    </svg>
-                </div>
-                <h3 class="service-card__title">Kullanımı En Kolay Arayüz</h3>
-                <p class="service-card__desc">Yazılım bilmenize gerek yok. Herkesin anlayabileceği kadar basit.</p>
-            </div>
+        <h2 class="section-title">Neden Okeep?</h2>
 
-            <!-- Kart 2 -->
-            <div class="service-card">
-                <div class="service-card__icon">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
-                        <path d="M22 4L12 14.01l-3-3" />
-                    </svg>
+        <!-- Satır 1 - Sola kayar -->
+        <div class="services-marquee services-marquee--left">
+            <div class="services-marquee__track" id="servicesRow1">
+                <!-- Kart 1 -->
+                <div class="service-card" data-card="1">
+                    <div class="service-card__icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" />
+                            <path d="M3 9h18" />
+                            <path d="M9 21V9" />
+                        </svg>
+                    </div>
+                    <h3 class="service-card__title">Kullanımı En Kolay Arayüz</h3>
+                    <p class="service-card__desc">Yazılım bilmenize gerek yok</p>
                 </div>
-                <h3 class="service-card__title">Hata Yapmayan Takip</h3>
-                <p class="service-card__desc">Fatura, stok ve kasa artık size emanet değil, sisteme emanet.</p>
-            </div>
 
-            <!-- Kart 3 -->
-            <div class="service-card">
-                <div class="service-card__icon">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-                    </svg>
+                <!-- Kart 2 -->
+                <div class="service-card" data-card="2">
+                    <div class="service-card__icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
+                            <path d="M22 4L12 14.01l-3-3" />
+                        </svg>
+                    </div>
+                    <h3 class="service-card__title">Hata Yapmayan Takip</h3>
+                    <p class="service-card__desc">Fatura, stok ve kasa sisteme emanet</p>
                 </div>
-                <h3 class="service-card__title">Hız ve Verimlilik</h3>
-                <p class="service-card__desc">Manuel işleri otomatiğe bağlayın, zamandan kazanın.</p>
-            </div>
 
-            <!-- Kart 4 -->
-            <div class="service-card">
-                <div class="service-card__icon">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
-                    </svg>
+                <!-- Kart 3 -->
+                <div class="service-card" data-card="3">
+                    <div class="service-card__icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                        </svg>
+                    </div>
+                    <h3 class="service-card__title">Hız ve Verimlilik</h3>
+                    <p class="service-card__desc">Manuel işleri otomatiğe bağlayın</p>
                 </div>
-                <h3 class="service-card__title">7/24 Teknik Destek</h3>
-                <p class="service-card__desc">Bir sorun olduğunda karşınızda robot değil, bizi bulursunuz.</p>
+
+                <!-- Kart 4 -->
+                <div class="service-card" data-card="4">
+                    <div class="service-card__icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+                        </svg>
+                    </div>
+                    <h3 class="service-card__title">7/24 Teknik Destek</h3>
+                    <p class="service-card__desc">Karşınızda robot değil, biz varız</p>
+                </div>
+
+                <!-- Duplicate for seamless loop -->
+                <div class="service-card" data-card="1">
+                    <div class="service-card__icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2" />
+                            <path d="M3 9h18" />
+                            <path d="M9 21V9" />
+                        </svg>
+                    </div>
+                    <h3 class="service-card__title">Kullanımı En Kolay Arayüz</h3>
+                    <p class="service-card__desc">Yazılım bilmenize gerek yok</p>
+                </div>
+
+                <div class="service-card" data-card="2">
+                    <div class="service-card__icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
+                            <path d="M22 4L12 14.01l-3-3" />
+                        </svg>
+                    </div>
+                    <h3 class="service-card__title">Hata Yapmayan Takip</h3>
+                    <p class="service-card__desc">Fatura, stok ve kasa sisteme emanet</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Satır 2 - Sağa kayar -->
+        <div class="services-marquee services-marquee--right">
+            <div class="services-marquee__track" id="servicesRow2">
+                <!-- Kart 5 -->
+                <div class="service-card" data-card="5">
+                    <div class="service-card__icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M12 6v6l4 2" />
+                        </svg>
+                    </div>
+                    <h3 class="service-card__title">Sezgisel Arayüz</h3>
+                    <p class="service-card__desc">Kod gerektirmez, kolay adaptasyon</p>
+                </div>
+
+                <!-- Kart 6 -->
+                <div class="service-card" data-card="6">
+                    <div class="service-card__icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M12 20h9" />
+                            <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" />
+                        </svg>
+                    </div>
+                    <h3 class="service-card__title">Süreç Optimizasyonu</h3>
+                    <p class="service-card__desc">Akıllı içgörüler ve iyileştirme</p>
+                </div>
+
+                <!-- Kart 7 -->
+                <div class="service-card" data-card="7">
+                    <div class="service-card__icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path
+                                d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" />
+                        </svg>
+                    </div>
+                    <h3 class="service-card__title">Maksimum Verimlilik</h3>
+                    <p class="service-card__desc">Yüksek performans, yeni iş gücü</p>
+                </div>
+
+                <!-- Kart 8 -->
+                <div class="service-card" data-card="8">
+                    <div class="service-card__icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M23 21v-2a4 4 0 00-3-3.87" />
+                            <path d="M16 3.13a4 4 0 010 7.75" />
+                        </svg>
+                    </div>
+                    <h3 class="service-card__title">Ekip Yönetimi</h3>
+                    <p class="service-card__desc">Personel takibi bir arada</p>
+                </div>
+
+                <!-- Duplicate for seamless loop -->
+                <div class="service-card" data-card="5">
+                    <div class="service-card__icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M12 6v6l4 2" />
+                        </svg>
+                    </div>
+                    <h3 class="service-card__title">Sezgisel Arayüz</h3>
+                    <p class="service-card__desc">Kod gerektirmez, kolay adaptasyon</p>
+                </div>
+
+                <div class="service-card" data-card="6">
+                    <div class="service-card__icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M12 20h9" />
+                            <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" />
+                        </svg>
+                    </div>
+                    <h3 class="service-card__title">Süreç Optimizasyonu</h3>
+                    <p class="service-card__desc">Akıllı içgörüler ve iyileştirme</p>
+                </div>
             </div>
         </div>
     </section>
@@ -220,7 +440,7 @@
     <!-- ═══════════════════════════════════════════════════════════════════════
          6. PORTFOLYO / BAŞARI HİKAYELERİ
     ═══════════════════════════════════════════════════════════════════════ -->
-    <section class="portfolio" id="projeler">
+    <section class="portfolio" id="projeler" style="display: none;">
         <h2 class="section-title">Çözümlerimiz</h2>
 
         <div class="portfolio__grid">
@@ -372,7 +592,7 @@
             </a>
 
             <!-- GitHub -->
-            <a href="https://github.com/okeep" class="social-btn" aria-label="GitHub">
+            <a href="https://github.com/okeep" class="social-btn" aria-label="GitHub" style="display: none;">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path
                         d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
@@ -384,6 +604,51 @@
             <p>&copy; 2026 Okeep. Tüm hakları saklıdır.</p>
         </div>
     </footer>
+
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         BOTTOM SHEET - Nasıl Çalışır?
+    ═══════════════════════════════════════════════════════════════════════ -->
+    <div class="bottom-sheet-overlay" id="bottomSheetOverlay"></div>
+    <div class="bottom-sheet" id="bottomSheet">
+        <div class="bottom-sheet__handle"></div>
+        <div class="bottom-sheet__content">
+            <h2 class="bottom-sheet__title">Nasıl Çalışır?</h2>
+
+            <!-- Adım 1 -->
+            <div class="step">
+                <div class="step__number">1</div>
+                <div class="step__content">
+                    <h3 class="step__title">Dinliyoruz <span>(Analiz)</span></h3>
+                    <p class="step__desc">Hangi işin vaktinizi aldığını, nerede hata yapıldığını ve neyi takip etmekte
+                        zorlandığınızı sizin dilinizden dinliyoruz.</p>
+                </div>
+            </div>
+
+            <!-- Adım 2 -->
+            <div class="step">
+                <div class="step__number">2</div>
+                <div class="step__content">
+                    <h3 class="step__title">Tasarlıyoruz <span>(Çözüm)</span></h3>
+                    <p class="step__desc">Karmaşık teknolojik terimlerle değil, en basit ve en hızlı kullanabileceğiniz
+                        size özel dijital altyapıyı hazırlıyoruz.</p>
+                </div>
+            </div>
+
+            <!-- Adım 3 -->
+            <div class="step">
+                <div class="step__number">3</div>
+                <div class="step__content">
+                    <h3 class="step__title">Teslim Ediyoruz <span>(Konfor)</span></h3>
+                    <p class="step__desc">Sistemi anahtar teslim kuruyoruz. Siz sadece telefonunuzdan veya
+                        bilgisayarınızdan işinizin tıkır tıkır işleyişini izliyorsunuz.</p>
+                </div>
+            </div>
+
+            <button type="button" class="btn btn--primary btn--full" id="closeBottomSheet">
+                Anladım
+            </button>
+        </div>
+    </div>
 
     <!-- Scripts -->
     <script src="./main.js"></script>

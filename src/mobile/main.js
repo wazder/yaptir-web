@@ -32,11 +32,101 @@
 document.addEventListener('DOMContentLoaded', function () {
    console.log('📱 Okeep Mobile initialized');
 
+   // ─────────────────────────────────────────────────────────────────
+   // SHUFFLE HELPER FUNCTION
+   // ─────────────────────────────────────────────────────────────────
+   function shuffleElements(container) {
+      if (!container) return;
+      const items = Array.from(container.children);
+      for (let i = items.length - 1; i > 0; i--) {
+         const j = Math.floor(Math.random() * (i + 1));
+         container.appendChild(items[j]);
+      }
+   }
+
+   // ─────────────────────────────────────────────────────────────────
+   // SHUFFLE TEAM CARDS
+   // ─────────────────────────────────────────────────────────────────
+   const teamScroll = document.querySelector('.team__scroll');
+   if (teamScroll) {
+      shuffleElements(teamScroll);
+   }
+
+   // ─────────────────────────────────────────────────────────────────
+   // SHUFFLE SERVICE CARDS (Both Marquee Rows)
+   // ─────────────────────────────────────────────────────────────────
+   function shuffleMarqueeRow(rowId) {
+      const track = document.getElementById(rowId);
+      if (!track) return;
+
+      // Get only unique cards (not duplicates)
+      const cards = Array.from(track.querySelectorAll('.service-card'));
+      const uniqueCards = cards.slice(0, Math.ceil(cards.length / 2));
+
+      // Shuffle unique cards
+      for (let i = uniqueCards.length - 1; i > 0; i--) {
+         const j = Math.floor(Math.random() * (i + 1));
+         [uniqueCards[i], uniqueCards[j]] = [uniqueCards[j], uniqueCards[i]];
+      }
+
+      // Clear track and rebuild with shuffled cards + duplicates
+      track.innerHTML = '';
+      uniqueCards.forEach(function (card) {
+         track.appendChild(card.cloneNode(true));
+      });
+      uniqueCards.forEach(function (card) {
+         track.appendChild(card.cloneNode(true));
+      });
+   }
+
+   shuffleMarqueeRow('servicesRow1');
+   shuffleMarqueeRow('servicesRow2');
+
    // Get elements
    const menuBtn = document.getElementById('menuBtn');
    const mobileMenu = document.getElementById('mobileMenu');
    const menuLinks = document.querySelectorAll('.mobile-menu__link');
    const contactForm = document.getElementById('contactForm');
+
+   // Bottom Sheet elements
+   const howItWorksBtn = document.getElementById('howItWorksBtn');
+   const bottomSheet = document.getElementById('bottomSheet');
+   const bottomSheetOverlay = document.getElementById('bottomSheetOverlay');
+   const closeBottomSheetBtn = document.getElementById('closeBottomSheet');
+
+   // ─────────────────────────────────────────────────────────────────
+   // BOTTOM SHEET
+   // ─────────────────────────────────────────────────────────────────
+   function openBottomSheet() {
+      bottomSheet.classList.add('active');
+      bottomSheetOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+   }
+
+   function closeBottomSheet() {
+      bottomSheet.classList.remove('active');
+      bottomSheetOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+   }
+
+   if (howItWorksBtn && bottomSheet) {
+      howItWorksBtn.addEventListener('click', openBottomSheet);
+
+      if (bottomSheetOverlay) {
+         bottomSheetOverlay.addEventListener('click', closeBottomSheet);
+      }
+
+      if (closeBottomSheetBtn) {
+         closeBottomSheetBtn.addEventListener('click', closeBottomSheet);
+      }
+
+      // Close on escape key
+      document.addEventListener('keydown', function (e) {
+         if (e.key === 'Escape' && bottomSheet.classList.contains('active')) {
+            closeBottomSheet();
+         }
+      });
+   }
 
    // ─────────────────────────────────────────────────────────────────
    // HAMBURGER MENU TOGGLE
