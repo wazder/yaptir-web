@@ -137,6 +137,185 @@ document.addEventListener('DOMContentLoaded', function () {
    shuffleMarqueeRow('servicesRow1');
    shuffleMarqueeRow('servicesRow2');
 
+   // ─────────────────────────────────────────────────────────────────
+   // SECTOR SPOTLIGHT
+   // ─────────────────────────────────────────────────────────────────
+   var sectorData = {
+      'restoran': {
+         title: 'Restoranınız İçin Yapay Zeka',
+         desc: 'Müşteri yorumlarını analiz edin, yoğun saatlere göre personel planlayın ve stok maliyetlerini %20 düşürün.',
+         features: ['Otomatik Stok', 'Yorum Analizi', 'Akıllı Vardiya']
+      },
+      'kafe': {
+         title: 'Kahve Dükkanınızın Yeni Beyni',
+         desc: 'Sadakat programlarını kişiselleştirin, kahve tüketimine göre sipariş tahminleri yapın.',
+         features: ['QR Menü', 'Sadakat Analizi', 'Tedarik Planı']
+      },
+      'bar': {
+         title: 'Gece Hayatında Veri Odaklı Akış',
+         desc: 'En popüler kokteylleri belirleyin, stok kayıplarını en aza indirin ve müşteri yoğunluğunu izleyin.',
+         features: ['Stok Takibi', 'Popüler Ürünler', 'Maliyet Analizi']
+      },
+      'fast-food': {
+         title: 'Hız Tutkunlarına Hızlı Servis',
+         desc: 'Sipariş sürelerini ölçün, yoğunluk anında mutfak operasyonunu otomatik optimize edin.',
+         features: ['Hız Analizi', 'Kiosk Entegre', 'Tahminleme']
+      },
+      'firin': {
+         title: 'Taze Ürün, Sıfır Atık',
+         desc: 'Günlük üretim miktarını hava durumu ve geçmiş satışlara göre belirleyin. Raflarınız boş, kasanız dolu kalsın.',
+         features: ['Üretim Planı', 'Atık Yönetimi', 'Talep Tahmini']
+      },
+      'paket-servis': {
+         title: 'Kurye Operasyonunda Tam Kontrol',
+         desc: 'Teslimat rotalarını optimize edin, kurye performansını izleyin ve müşteri memnuniyetini zirveye taşıyın.',
+         features: ['Rota Optimizasyonu', 'Sıcak Teslimat', 'Kurye Takip']
+      },
+      'fine-dining': {
+         title: 'Kusursuz Misafir Deneyimi',
+         desc: 'VIP müşterilerinizi tanıyın, rezervasyon geçmişine göre özel öneriler sunun ve servis kalitesini standartlaştırın.',
+         features: ['VIP CRM', 'Rezervasyon AI', 'Özel Menü']
+      },
+      'e-ticaret': {
+         title: 'E-Ticarette Dönüşüm Rekorları',
+         desc: 'Sepet terk edenleri geri kazanın ve müşterilerinize tam olarak aradıkları ürünleri önerin.',
+         features: ['Sepet Analizi', 'Kişisel Öneri', 'Dinamik Fiyat']
+      },
+      'magaza': {
+         title: 'Mağaza İçi Akıllı Analitik',
+         desc: 'Hangi reyon daha sıcak? Fiziksel mağazanızı web siteniz gibi ölçün.',
+         features: ['Kişi Sayma', 'Sıcaklık Haritası', 'Vitrin Analizi']
+      },
+      'moda': {
+         title: 'Trendleri Yapay Zeka ile Yakala',
+         desc: 'Gelecek sezonun renklerini ve modellerini bugünden tahmin edin. Stoklarınızı moda akımlarına göre yönetin.',
+         features: ['Trend Analizi', 'Stok Devir', 'Kombin Önerisi']
+      },
+      'spor-giyim': {
+         title: 'Performans Odaklı Perakende',
+         desc: 'Sporcu müşterilerinizin aktivitelerine göre ürün önerin. Mevsimsel değişimlere hazırlıklı olun.',
+         features: ['Sezon Planı', 'Aktivite Hedefli', 'Stok Yönetimi']
+      },
+      'taki': {
+         title: 'Değerli Anlar İçin Özel Seçimler',
+         desc: 'Müşterilerinizin özel günlerini hatırlayın ve onlara en uygun hediye seçeneklerini otomatik sunun.',
+         features: ['Özel Gün Hatırlatıcı', 'Hediye Asistanı', 'CRM']
+      },
+      'hediyelik': {
+         title: 'Hediye Seçimini Kolaylaştırın',
+         desc: 'Kararsız müşterilere saniyeler içinde en doğru hediye profilini çıkaran akıllı asistan.',
+         features: ['Hediye Botu', 'Trend Ürünler', 'Paketleme']
+      },
+      'optik': {
+         title: 'Görsel Seçimde Dijital Asistan',
+         desc: 'Yüz şekline en uygun çerçeveyi öneren algoritmalar ile müşteri karar sürecini kısaltın.',
+         features: ['Çerçeve Önerisi', 'Yüz Analizi', 'Stok Takibi']
+      },
+      'otel': {
+         title: 'Misafir Memnuniyetinde Mükemmellik',
+         desc: 'Check-in yoğunluğunu tahmin edin, oda servisi tercihlerini öğrenin ve 7/24 dijital konsiyerj hizmeti sunun.',
+         features: ['Akıllı Check-in', 'Talep Tahmini', 'Dijital Asistan']
+      },
+      'guzellik': {
+         title: 'Randevu Doluluğunu Artırın',
+         desc: 'Son dakika iptallerini otomatik doldurun ve müşterilerinize bakım zamanı geldiğinde hatırlatma yapın.',
+         features: ['Akıllı Randevu', 'Bakım Hatırlatıcı', 'No-Show Önleme']
+      },
+      'kuafor': {
+         title: 'Stil Danışmanınız Yapay Zeka',
+         desc: 'Müşterinizin saç yapısına ve geçmiş tercihlerine göre en uygun bakım ürünlerini ve modelleri önerin.',
+         features: ['Stil Önerisi', 'Ürün Satışı', 'Müşteri Takip']
+      },
+      'spa': {
+         title: 'Rahatlatıcı ve Kişisel Deneyim',
+         desc: 'Misafirlerinizin stres seviyesine ve tercihlerine göre en uygun terapi paketlerini otomatik oluşturun.',
+         features: ['Paket Önerisi', 'Terapi Takibi', 'Doluluk Analizi']
+      },
+      'spor-salonu': {
+         title: 'Üye Bağlılığını Zirveye Taşıyın',
+         desc: 'Antrenmanlarını aksatan üyeleri tespit edin ve onları motive edecek kişisel mesajlar gönderin.',
+         features: ['Üye Takibi', 'Risk Analizi', 'Motivasyon AI']
+      },
+      'klinik': {
+         title: 'Hasta Süreçlerinde Kusursuz Akış',
+         desc: 'Randevu çakışmalarını önleyin, hasta takibini dijitalleştirin ve bekleme sürelerini minimize edin.',
+         features: ['Randevu Optim.', 'Hasta Takibi', 'Süreç Analizi']
+      },
+      'dis': {
+         title: 'Gülüş Tasarımında Teknoloji',
+         desc: 'Tedavi süreçlerini görselleştirin ve hastalarınıza tedavi sonrası simülasyonları sunun.',
+         features: ['Tedavi Simülasyonu', 'Randevu Takip', 'Hasta CRM']
+      }
+   };
+
+   var sectorsTrack = document.getElementById('sectorsTrack');
+   var sectorPills = document.querySelectorAll('.sector-pill[data-sector]');
+   var sectorDetailEl = document.getElementById('sectorDetail');
+   var sectorTitleEl = document.getElementById('sectorDetailTitle');
+   var sectorDescEl = document.getElementById('sectorDetailDesc');
+   var sectorFeaturesEl = document.getElementById('sectorDetailFeatures');
+   var sectorAutoInterval = null;
+
+   function selectSector(sectorKey, pill) {
+      var data = sectorData[sectorKey];
+      if (!data) return;
+
+      // Update active pill
+      sectorPills.forEach(function (p) { p.classList.remove('active'); });
+      pill.classList.add('active');
+
+      // Smooth scroll chip into view
+      var trackRect = sectorsTrack.getBoundingClientRect();
+      var pillRect = pill.getBoundingClientRect();
+      var pillCenter = pillRect.left + pillRect.width / 2;
+      var trackCenter = trackRect.left + trackRect.width / 2;
+      var scrollOffset = pillCenter - trackCenter;
+      sectorsTrack.scrollBy({ left: scrollOffset, behavior: 'smooth' });
+
+      // Animate detail content
+      sectorDetailEl.style.animation = 'none';
+      // Force reflow
+      void sectorDetailEl.offsetHeight;
+      sectorDetailEl.style.animation = 'sectorFadeIn 0.3s ease';
+
+      // Update content
+      sectorTitleEl.textContent = data.title;
+      sectorDescEl.textContent = data.desc;
+      sectorFeaturesEl.innerHTML = data.features.map(function (f) {
+         return '<span class="sector-detail__tag">' + f + '</span>';
+      }).join('');
+   }
+
+   // Click handlers
+   sectorPills.forEach(function (pill) {
+      pill.addEventListener('click', function () {
+         var key = pill.getAttribute('data-sector');
+         selectSector(key, pill);
+         // Reset auto-rotate timer on manual click
+         startSectorAutoRotate();
+      });
+   });
+
+   // Auto-rotate: random sector every 5s
+   function startSectorAutoRotate() {
+      if (sectorAutoInterval) clearInterval(sectorAutoInterval);
+      sectorAutoInterval = setInterval(function () {
+         var pillsArray = Array.from(sectorPills);
+         var currentActive = document.querySelector('.sector-pill.active');
+         var available = pillsArray.filter(function (p) { return p !== currentActive; });
+         var randomPill = available[Math.floor(Math.random() * available.length)];
+         if (randomPill) {
+            var key = randomPill.getAttribute('data-sector');
+            selectSector(key, randomPill);
+         }
+      }, 5000);
+   }
+
+   if (sectorPills.length > 0) {
+      startSectorAutoRotate();
+   }
+
+
    // Get elements
    const menuBtn = document.getElementById('menuBtn');
    const mobileMenu = document.getElementById('mobileMenu');

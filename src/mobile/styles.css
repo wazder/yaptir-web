@@ -439,6 +439,10 @@ ol {
 
 .btn--full {
     width: 100%;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
 }
 
 /* ─────────────────────────────────────────────────────────────────────
@@ -489,6 +493,66 @@ ol {
 .sector-pill:active {
     background: var(--color-surface-hover);
     color: var(--color-text);
+}
+
+.sector-pill.active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: white;
+}
+
+.sector-pill.active svg {
+    stroke: white;
+}
+
+/* Sector Detail */
+.sector-detail {
+    padding: var(--space-md) var(--space-lg);
+    animation: sectorFadeIn 0.3s ease;
+}
+
+@keyframes sectorFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.sector-detail__title {
+    font-size: var(--font-base);
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: var(--space-xs);
+}
+
+.sector-detail__desc {
+    font-size: var(--font-sm);
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    margin-bottom: var(--space-md);
+}
+
+.sector-detail__features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+}
+
+.sector-detail__tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    background: var(--color-primary-glow);
+    border: 1px solid var(--color-primary);
+    border-radius: var(--radius-full);
+    font-size: var(--font-xs);
+    font-weight: 500;
+    color: var(--color-primary-light);
 }
 
 /* ─────────────────────────────────────────────────────────────────────
@@ -984,7 +1048,7 @@ ol {
         justify-content: center;
     }
 
-    .btn {
+    .hero__actions .btn {
         flex: 1;
         max-width: 180px;
     }
