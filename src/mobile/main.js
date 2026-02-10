@@ -780,4 +780,78 @@ document.addEventListener('DOMContentLoaded', function () {
          });
       }
    }
+
+   // ─────────────────────────────────────────────────────────────────
+   // HERO STARS ANIMATION
+   // ─────────────────────────────────────────────────────────────────
+   const starsContainer = document.getElementById('heroStars');
+   if (starsContainer) {
+      const starCount = 50;
+      for (let i = 0; i < starCount; i++) {
+         const star = document.createElement('div');
+         star.classList.add('star');
+
+         // Top-heavy distribution: Using power^2 to concentrate stars near top (0%)
+         const x = Math.random() * 100;
+         const y = Math.pow(Math.random(), 1.5) * 80; // 0-80% height, concentrated top
+
+         const size = Math.random() * 2 + 1; // 1-3px
+         const duration = Math.random() * 3 + 2; // 2-5s
+         const delay = Math.random() * 2; // 0-2s
+
+         star.style.left = x + '%';
+         star.style.top = y + '%';
+         star.style.width = size + 'px';
+         star.style.height = size + 'px';
+         star.style.setProperty('--duration', duration + 's');
+         star.style.setProperty('--delay', delay + 's');
+         star.style.setProperty('--opacity', Math.random() * 0.5 + 0.3);
+
+         starsContainer.appendChild(star);
+      }
+
+      // Shooting Star Logic
+      function createShootingStar() {
+         // Limit max 2 shooting stars at once
+         if (document.querySelectorAll('.shooting-star').length >= 2) {
+            scheduleNextShootingStar();
+            return;
+         }
+
+         const shootingStar = document.createElement('div');
+         shootingStar.classList.add('shooting-star');
+
+         // Random start position (mostly top area)
+         const startX = Math.random() * 100;
+         const startY = Math.random() * 40 - 10;
+
+         shootingStar.style.left = startX + '%';
+         shootingStar.style.top = startY + '%';
+
+         // Random scale for variety
+         const scale = Math.random() * 0.5 + 0.4;
+         shootingStar.style.transform = `rotate(-45deg) scale(${scale})`;
+
+         // FAST duration (0.5s - 1.2s)
+         const duration = Math.random() * 0.7 + 0.5;
+         shootingStar.style.animationDuration = duration + 's';
+
+         starsContainer.appendChild(shootingStar);
+
+         // Remove after animation
+         setTimeout(() => {
+            shootingStar.remove();
+         }, duration * 1000);
+
+         scheduleNextShootingStar();
+      }
+
+      function scheduleNextShootingStar() {
+         const delay = Math.random() * 5000 + 2000;
+         setTimeout(createShootingStar, delay);
+      }
+
+      // Start the loop almost immediately
+      setTimeout(createShootingStar, 100);
+   }
 });
