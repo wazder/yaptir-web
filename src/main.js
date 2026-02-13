@@ -135,7 +135,7 @@ function initContactForm() {
         const subject = `Okeep İletişim Formu - ${name}`;
         const body = `İsim: ${name}\nE-posta: ${email}\n\nMesaj:\n${message}`;
 
-        const mailtoLink = `mailto:destek@okeep.co?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        const mailtoLink = `mailto:hasan.tatar@okeep.co?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
         // Open user's email client
         window.location.href = mailtoLink;
