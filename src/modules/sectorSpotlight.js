@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════════════
-   OKEEP AI STUDIO - Sector Spotlight Logic
+   YAPTIR.IO AI STUDIO - Sector Spotlight Logic
    Handles the interactive display of sector-specific AI benefits.
    Now supports Hover-to-Preview.
 ═══════════════════════════════════════════════════════════════════════ */
