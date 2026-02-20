@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════════════
-   OKEEP AI CHAT - Galaxy Canvas (Module)
+   YAPTIR.IO AI CHAT - Galaxy Canvas (Module)
    Targets #galaxy-canvas inside the section.
 ═══════════════════════════════════════════════════════════════════════ */
 

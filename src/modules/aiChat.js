@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════════════
-   OKEEP GALAXY CHAT LOGIC
+   YAPTIR.IO GALAXY CHAT LOGIC
    Handles the chat interface embedded in the main page.
    Powered by Groq API (Llama 3.1)
 ═══════════════════════════════════════════════════════════════════════ */
@@ -7,10 +7,10 @@
 // Groq API Key (Free tier)
 const GROQ_API_KEY = 'REDACTED_GROQ_KEY';
 
-const SYSTEM_PROMPT = `Sen Okeep'in yapay zeka asistanısın. Okeep, HER SEKTÖRDEN işletmelere yapay zeka destekli otomasyon ve verimlilik çözümleri sunan bir teknoloji şirketidir. Hangi sektör olursa olsun, işletmelere özel çözümler üretiyoruz!
+const SYSTEM_PROMPT = `Sen Yaptir.io'nun yapay zeka asistanısın. Yaptir.io, HER SEKTÖRDEN işletmelere yapay zeka destekli otomasyon ve verimlilik çözümleri sunan bir teknoloji şirketidir. Hangi sektör olursa olsun, işletmelere özel çözümler üretiyoruz!
 
 Görevin:
-- Ziyaretçilere Okeep'in hizmetleri hakkında bilgi vermek
+- Ziyaretçilere Yaptir.io'nun hizmetleri hakkında bilgi vermek
 - HER sektöre özel çözümler önermek (hiçbir sektörü reddetme!)
 - Demo talep etmeleri için yönlendirmek
 - Ekip üyeleri hakkında bilgi vermek
@@ -50,7 +50,7 @@ Ekibimiz:
 - Fiyat sorulursa "işletmenize özel fiyatlandırma için demo talep edin" de
 - Demo için iletişim formunu yönlendir
 - Ekip hakkında sorulduğunda ilgili kişinin rolü ve uzmanlık alanını belirt
-- Okeep dışı konularda (politika, spor sonuçları vs.) "Bu konuda yardımcı olamıyorum, ama işletmeniz için neler yapabileceğimizi konuşalım!" de`;
+- Yaptir.io dışı konularda (politika, spor sonuçları vs.) "Bu konuda yardımcı olamıyorum, ama işletmeniz için neler yapabileceğimizi konuşalım!" de`;
 
 const conversationHistory = [];
 
@@ -68,7 +68,7 @@ export function initGalaxyChat() {
     const suggestions = [
         "Restoran maliyetlerimi nasıl düşürebilirim?",
         "E-ticaret dönüşüm oranlarını artırın",
-        "Okeep demo alabilir miyim?"
+        "Yaptir.io demo alabilir miyim?"
     ];
 
     // Render Chips

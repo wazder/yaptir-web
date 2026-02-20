@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════════════
-   OKEEP AI STUDIO - Hero Canvas
+   YAPTIR.IO AI STUDIO - Hero Canvas
    Canva-style Interactive Dot Grid with Mouse Effects
 ═══════════════════════════════════════════════════════════════════════ */
 

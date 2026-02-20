@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════════════
-   OKEEP AI STUDIO - Scroll Animations
+   YAPTIR.IO AI STUDIO - Scroll Animations
    Spring-physics reveal animations using IntersectionObserver
 ═══════════════════════════════════════════════════════════════════════ */
 
