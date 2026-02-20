@@ -3,7 +3,7 @@
   "configVersion": 0,
   "workspaces": {
     "": {
-      "name": "okeep-studio",
+      "name": "yaptirio",
       "dependencies": {
         "three": "^0.160.0",
       },

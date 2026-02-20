@@ -1,10 +1,10 @@
 /* ═══════════════════════════════════════════════════════════════════════
-   OKEEP AI STUDIO - Full Page Scroll Core
+   YAPTIR.IO AI STUDIO - Full Page Scroll Core
    Manages section-based scrolling interactions
 ═══════════════════════════════════════════════════════════════════════ */
 
 /* ═══════════════════════════════════════════════════════════════════════
-   OKEEP AI STUDIO - Premium Full Page Scroll
+   YAPTIR.IO AI STUDIO - Premium Full Page Scroll
    Strict "Slide-Like" Navigation (One scroll = One page)
 ═══════════════════════════════════════════════════════════════════════ */
 

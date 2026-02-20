@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════════════
-   OKEEP MOBILE - Main JS
+   YAPTIR.IO MOBILE - Main JS
    Minimal JavaScript for essential interactions
 ═══════════════════════════════════════════════════════════════════════ */
 
@@ -8,7 +8,7 @@
 // ─────────────────────────────────────────────────────────────────────
 var GROQ_API_KEY = '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';
 
-var AI_SYSTEM_PROMPT = 'Sen Okeep\'in yapay zeka asistanısın. Okeep, HER SEKTÖRDEN işletmelere yapay zeka destekli otomasyon ve verimlilik çözümleri sunan bir teknoloji şirketidir.\n\nGörevin:\n- Ziyaretçilere Okeep\'in hizmetleri hakkında bilgi vermek\n- HER sektöre özel çözümler önermek\n- Demo talep etmeleri için yönlendirmek\n\nTemel Çözümlerimiz:\n📊 Veri Analizi & Raporlama\n📈 Otomasyon\n🎯 Müşteri Yönetimi (CRM)\n📅 Randevu & Rezervasyon\n💰 Maliyet Optimizasyonu\n🤖 AI Asistan\n\nKurallar:\n- Kısa ve öz yanıtlar ver (2-3 cümle)\n- Samimi ve yardımsever ol\n- Türkçe konuş\n- Hiçbir sektörü reddetme\n- Demo için iletişim formunu yönlendir';
+var AI_SYSTEM_PROMPT = 'Sen Yaptir.io\'in yapay zeka asistanısın. Yaptir.io, HER SEKTÖRDEN işletmelere yapay zeka destekli otomasyon ve verimlilik çözümleri sunan bir teknoloji şirketidir.\n\nGörevin:\n- Ziyaretçilere Yaptir.io\'in hizmetleri hakkında bilgi vermek\n- HER sektöre özel çözümler önermek\n- Demo talep etmeleri için yönlendirmek\n\nTemel Çözümlerimiz:\n📊 Veri Analizi & Raporlama\n📈 Otomasyon\n🎯 Müşteri Yönetimi (CRM)\n📅 Randevu & Rezervasyon\n💰 Maliyet Optimizasyonu\n🤖 AI Asistan\n\nKurallar:\n- Kısa ve öz yanıtlar ver (2-3 cümle)\n- Samimi ve yardımsever ol\n- Türkçe konuş\n- Hiçbir sektörü reddetme\n- Demo için iletişim formunu yönlendir';
 
 var aiConversationHistory = [];
 
@@ -39,7 +39,7 @@ var aiConversationHistory = [];
 // THEME MANAGEMENT - Device preference + manual toggle + localStorage
 // ─────────────────────────────────────────────────────────────────────
 (function () {
-   const THEME_KEY = 'okeep-theme';
+   const THEME_KEY = 'yaptir-theme';
    const html = document.documentElement;
 
    // Get saved preference or device preference
@@ -85,7 +85,7 @@ var aiConversationHistory = [];
 // DOM Ready
 // ─────────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', function () {
-   console.log('📱 Okeep Mobile initialized');
+   console.log('📱 Yaptir.io Mobile initialized');
 
    // ─────────────────────────────────────────────────────────────────
    // SHUFFLE HELPER FUNCTION

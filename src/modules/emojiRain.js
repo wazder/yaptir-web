@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════════════
-   OKEEP AI STUDIO - Emoji Rain Module
+   YAPTIR.IO AI STUDIO - Emoji Rain Module
    Triggered on specific section transitions
    Emojis: ⏳, 💰, 🤖, 👷, ⚡, 📈, 🚀
 ═══════════════════════════════════════════════════════════════════════ */

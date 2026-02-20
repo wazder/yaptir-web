@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════════════
-   OKEEP AI STUDIO - Main JavaScript
+   YAPTIR.IO AI STUDIO - Main JavaScript
    Orchestrates all interactions and animations
 ═══════════════════════════════════════════════════════════════════════ */
 
@@ -43,7 +43,7 @@ import { initApproachXray } from './modules/approachXray.js';
 // DOM Ready (Desktop Only)
 // ─────────────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('🖥️ Okeep AI Studio (Desktop) - Initializing...');
+    console.log('🖥️ Yaptir.io AI Studio (Desktop) - Initializing...');
 
     // Initialize Lucide Icons
     if (typeof lucide !== 'undefined') {
@@ -132,10 +132,10 @@ function initContactForm() {
         const message = form.querySelector('#contact-message').value || '';
 
         // Build mailto link
-        const subject = `Okeep İletişim Formu - ${name}`;
+        const subject = `Yaptir.io İletişim Formu - ${name}`;
         const body = `İsim: ${name}\nE-posta: ${email}\n\nMesaj:\n${message}`;
 
-        const mailtoLink = `mailto:hasan.tatar@okeep.co?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        const mailtoLink = `mailto:hasan.tatar@yaptir.io?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
         // Open user's email client
         window.location.href = mailtoLink;
