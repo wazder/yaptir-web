@@ -135,7 +135,7 @@ function initContactForm() {
         const subject = `Yaptir.io İletişim Formu - ${name}`;
         const body = `İsim: ${name}\nE-posta: ${email}\n\nMesaj:\n${message}`;
 
-        const mailtoLink = `mailto:hasan.tatar@yaptir.io?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        const mailtoLink = `mailto:REDACTED_EMAIL?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
         // Open user's email client
         window.location.href = mailtoLink;
