@@ -5,7 +5,7 @@
 ═══════════════════════════════════════════════════════════════════════ */
 
 // Groq API Key (Free tier)
-const GROQ_API_KEY = 'REDACTED_GROQ_KEY';
+const GROQ_API_KEY = 'YOUR_GROQ_API_KEY';
 
 const SYSTEM_PROMPT = `Sen Yaptir.io'nun yapay zeka asistanısın. Yaptir.io, HER SEKTÖRDEN işletmelere yapay zeka destekli otomasyon ve verimlilik çözümleri sunan bir teknoloji şirketidir. Hangi sektör olursa olsun, işletmelere özel çözümler üretiyoruz!
 
